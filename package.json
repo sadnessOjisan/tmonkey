@@ -19,7 +19,9 @@
   },
   "scripts": {
     "test": "jest",
+    "typecheck": "tsc -p . --noEmit",
     "start": "ts-node src/main.ts",
+    "build": "tsc",
     "format": "prettier --write '**/*.{ts,json}'",
     "format:ci": "yarn prettier './src/**/*.{ts,json}' -- --check",
     "lint": "eslint --fix 'src/**/*.{ts,json}'",
