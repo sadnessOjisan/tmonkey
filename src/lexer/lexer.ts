@@ -1,6 +1,12 @@
 /* eslint-disable no-fallthrough, @typescript-eslint/ban-ts-ignore */
 
-import { Token, token, lookupIdent, strToTokenType } from "../token/token ";
+import {
+  Token,
+  token,
+  lookupIdent,
+  strToTokenType,
+  tokenValues,
+} from "../token/token ";
 
 export class Lexer {
   constructor(
@@ -73,12 +79,19 @@ export class Lexer {
         break;
       case "}":
         tok = this.newToken(token.RBRACE, this.ch);
+        break;
       case "(":
         tok = this.newToken(token.LPAREN, this.ch);
         break;
       case ")":
         tok = this.newToken(token.RPAREN, this.ch);
         break;
+      case "": // FIXME: なにかsimbolとかに置き換えたい
+        // EOFの場合
+        if (this.peekChar() === token.EOF) {
+          tok = this.newToken(token.EOF, this.ch);
+          break;
+        }
       default:
         if (this.isLetter(this.ch)) {
           // token以外に数字とか自由な文字が入ってくる
@@ -128,7 +141,7 @@ export class Lexer {
 
   peekChar(): string {
     if (this.readPosition >= this.input.length) {
-      return ""; // zero value of string
+      return token.EOF; // zero value of string
     } else {
       return this.input[this.readPosition];
     }
