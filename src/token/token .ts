@@ -7,7 +7,7 @@ export const token = {
   INT: "INT" as const, // 1343456
 
   // Operators
-  ASSIGN: ":" as const,
+  ASSIGN: "=" as const,
   PLUS: "+" as const,
   MINUS: "-" as const,
   BANG: "!" as const,
@@ -22,7 +22,7 @@ export const token = {
 
   // Delimiters
   COMMA: "," as const,
-  SEMICOLON: "," as const,
+  SEMICOLON: ";" as const,
 
   LPAREN: "(" as const,
   RPAREN: ")" as const,
