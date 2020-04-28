@@ -24,4 +24,4 @@ jobs:
           yarn lint:ci
       - name: build
         run: |
-          yarn build:dev
+          yarn build
