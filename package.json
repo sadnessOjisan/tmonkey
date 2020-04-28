@@ -1,0 +1,18 @@
+{
+  "name": "tmonkey",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/sadnessOjisan/tmonkey.git",
+  "author": "sadness_ojisan <sadness.ojisan@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/jest": "^25.2.1",
+    "jest": "^25.4.0",
+    "ts-node": "^8.9.1",
+    "typescript": "^3.8.3"
+  },
+  "scripts": {
+    "test": "jest",
+    "start": "ts-node src/main.ts"
+  }
+}
