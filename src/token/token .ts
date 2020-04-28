@@ -39,6 +39,15 @@ export const token = {
   RETURN: "RETURN" as const,
 };
 
+export const tokenValues = Object.values(token);
+
+export const strToTokenType = (str: any): TokenType => {
+  if (!tokenValues.includes(str)) {
+    throw new Error("unsexpected type");
+  }
+  return str;
+};
+
 export const keywords = {
   fn: token.FUNCTION,
   let: token.LET,
@@ -49,10 +58,15 @@ export const keywords = {
   return: token.RETURN,
 };
 
-type TokenSetType = typeof token;
+type ValuesOf<T extends { [key: string]: unknown }> = T[keyof T];
+export type TokenSetType = typeof token;
 type KeyWordsKeyType = keyof typeof keywords;
-type Value<T> = T[keyof T];
-type TokenType = Value<TokenSetType>;
+export type TokenType = ValuesOf<TokenSetType>;
+
+export interface Token {
+  type: TokenType;
+  literal: string;
+}
 
 export const lookupIdent = (ident: string): TokenType => {
   return keywords[ident as KeyWordsKeyType] || token.IDENT;
