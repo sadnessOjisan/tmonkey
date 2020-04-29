@@ -20,6 +20,8 @@ export const precedences = {
   CALL,
 };
 
+export type PrecedencesKeyType = keyof typeof precedences;
+
 export const precedenceTable = {
   [token.EQ]: EQUALS,
   [token.NOT_EQ]: EQUALS,
@@ -31,3 +33,5 @@ export const precedenceTable = {
   [token.ASTERISK]: PRODUCT,
   [token.LPAREN]: CALL,
 };
+
+export type PrecedenceTableKeyType = keyof typeof precedenceTable;

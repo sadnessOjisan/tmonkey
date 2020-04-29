@@ -3,14 +3,19 @@ import { Token, token, TokenType } from "../token/token ";
 import { Expression } from "../ast/Node";
 import Identifier from "../ast/Identifier";
 import InfixExpression from "../ast/InfixExpression";
-import { precedenceTable, precedences } from "./precedenceTable";
+import {
+  precedenceTable,
+  precedences,
+  PrecedenceTableKeyType,
+  PrecedencesKeyType,
+} from "./precedenceTable";
 
 type PrefixParseFnsType = {
-  [str: TokenType]: () => Expression;
+  [key in TokenType]: () => Expression;
 };
 
 type InfixParseFnsType = {
-  [str: TokenType]: (ex: Expression) => Expression;
+  [key in TokenType]: (ex: Expression) => Expression;
 };
 
 export default class Parser {
@@ -26,7 +31,7 @@ export default class Parser {
   ) {
     this.curToken = curToken;
     this.peekToken = peekToken;
-    this.prefixParseFns = {};
+    this.prefixParseFns = {} as PrefixParseFnsType;
     this.registerPrefix(token.IDENT, this.parseIdentifier);
     this.registerPrefix(token.INT, this.parseIdentifier);
     this.registerPrefix(token.BANG, this.parseIdentifier);
@@ -37,7 +42,7 @@ export default class Parser {
     this.registerPrefix(token.IF, this.parseIdentifier);
     this.registerPrefix(token.FUNCTION, this.parseIdentifier);
 
-    this.infixParseFns = {};
+    this.infixParseFns = {} as InfixParseFnsType;
     this.registerInfix(token.IDENT, this.parseInfixExpression);
     this.registerInfix(token.INT, this.parseInfixExpression);
     this.registerInfix(token.BANG, this.parseInfixExpression);
@@ -55,7 +60,10 @@ export default class Parser {
   }
 
   curPrecedence(): number {
-    return precedenceTable[this.curToken.type] || precedences.LOWEST;
+    return (
+      precedenceTable[this.curToken.type as PrecedenceTableKeyType] ||
+      precedences.LOWEST
+    );
   }
 
   parseIdentifier(): Expression {
@@ -73,7 +81,10 @@ export default class Parser {
   }
 
   peekPrecedence(): number {
-    return precedences[p.peekToken.Type] || precedences.LOWEST;
+    return (
+      precedences[this.peekToken.type as PrecedencesKeyType] ||
+      precedences.LOWEST
+    );
   }
 
   parseExpression(precedence: number): Expression | undefined {
@@ -88,7 +99,7 @@ export default class Parser {
       !this.peekTokenIs(token.SEMICOLON) &&
       precedence < this.peekPrecedence()
     ) {
-      const infix = this.infixParseFns[this.peekToken.Type];
+      const infix = this.infixParseFns[this.peekToken.type];
       if (infix == undefined) {
         return leftExp;
       }
@@ -110,7 +121,10 @@ export default class Parser {
 
     const precedence = this.curPrecedence();
     this.nextToken();
-    expression.setRight(this.parseExpression(precedence));
+    const parsedExpression = this.parseExpression(precedence);
+    if (parsedExpression) {
+      expression.setRight(parsedExpression);
+    }
     return expression;
   }
 
