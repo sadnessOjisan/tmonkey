@@ -1,6 +1,6 @@
 import { Lexer } from "../lexer/lexer";
 import { Token, token, TokenType } from "../token/token ";
-import { Expression } from "../ast/Node";
+import { Expression, Statement } from "../ast/Node";
 import Identifier from "../ast/Identifier";
 import InfixExpression from "../ast/InfixExpression";
 import {
@@ -9,6 +9,10 @@ import {
   PrecedenceTableKeyType,
   PrecedencesKeyType,
 } from "./precedenceTable";
+import Program from "../ast/Program";
+import LetStatement from "../ast/LetStatement";
+import ExpressionStatement from "../ast/ExpressionStatement";
+import ReturnStatement from "../ast/ReturnStatement";
 
 type PrefixParseFnsType = {
   [key in TokenType]: () => Expression;
@@ -19,18 +23,13 @@ type InfixParseFnsType = {
 };
 
 export default class Parser {
-  private curToken: Token;
-  private peekToken: Token;
+  private _errors: string[];
+  private curToken?: Token;
+  private peekToken?: Token;
   private prefixParseFns: PrefixParseFnsType;
   private infixParseFns: InfixParseFnsType;
-  constructor(
-    private lexer: Lexer,
-    private errors: string[],
-    curToken: Token,
-    peekToken: Token
-  ) {
-    this.curToken = curToken;
-    this.peekToken = peekToken;
+  constructor(private lexer: Lexer) {
+    this._errors = [];
     this.prefixParseFns = {} as PrefixParseFnsType;
     this.registerPrefix(token.IDENT, this.parseIdentifier);
     this.registerPrefix(token.INT, this.parseIdentifier);
@@ -54,6 +53,106 @@ export default class Parser {
     this.registerInfix(token.FUNCTION, this.parseInfixExpression);
   }
 
+  static of(lexer: Lexer) {
+    return new Parser(lexer);
+  }
+
+  get errors(): string[] {
+    return this._errors;
+  }
+
+  curTokenIs(t: TokenType): boolean {
+    return this.curToken ? this.curToken.type == t : false;
+  }
+
+  parseStatement(): Statement {
+    switch (this.curToken?.type) {
+      case token.LET:
+        return this.parseLetStatement();
+      case token.RETURN:
+        return this.parseReturnStatement();
+      default:
+        return this.parseExpressionStatement();
+    }
+  }
+
+  expectPeek(t: TokenType): boolean {
+    if (this.peekTokenIs(t)) {
+      this.nextToken();
+      return true;
+    } else {
+      this.peekError(t);
+      return false;
+    }
+  }
+
+  parseLetStatement(): LetStatement {
+    if (!this.curToken) throw new Error("undefined"); // FIXME: 本当に例外なげていい？
+    const stmt = LetStatement.of(this.curToken);
+
+    if (!this.expectPeek(token.IDENT)) {
+      return undefined;
+    }
+
+    stmt.name = Identifier.of(this.curToken, this.curToken.literal);
+
+    if (!this.expectPeek(token.ASSIGN)) {
+      return undefined;
+    }
+
+    this.nextToken();
+
+    stmt.value = this.parseExpression(LOWEST);
+
+    if (this.peekTokenIs(token.SEMICOLON)) {
+      this.nextToken();
+    }
+
+    return stmt;
+  }
+
+  parseReturnStatement(): ReturnStatement {
+    if (!this.curToken) throw new Error("undefined"); // FIXME: 本当に例外なげていい？
+
+    const stmt = new ReturnStatement(this.curToken);
+
+    this.nextToken();
+
+    stmt.returnValue = this.parseExpression(precedences.LOWEST);
+
+    if (this.peekTokenIs(token.SEMICOLON)) {
+      this.nextToken();
+    }
+
+    return stmt;
+  }
+
+  parseExpressionStatement(): ExpressionStatement {
+    if (!this.curToken) throw new Error("undefined"); // FIXME: 本当に例外なげていい？
+    const stmt = new ExpressionStatement(this.curToken);
+
+    stmt.expression = this.parseExpression(precedences.LOWEST);
+
+    if (this.peekTokenIs(token.SEMICOLON)) {
+      this.nextToken();
+    }
+
+    return stmt;
+  }
+
+  parseProgram(): Program {
+    const program = Program.of([]);
+    program.statements = [];
+    while (!this.curTokenIs(token.EOF)) {
+      const stmt = this.parseStatement();
+      if (stmt != undefined) {
+        program.statements = [...program.statements, stmt];
+      }
+      this.nextToken();
+    }
+    return program;
+  }
+
   nextToken(): void {
     this.curToken = this.peekToken;
     this.peekToken = this.lexer.nextToken();
@@ -61,7 +160,7 @@ export default class Parser {
 
   curPrecedence(): number {
     return (
-      precedenceTable[this.curToken.type as PrecedenceTableKeyType] ||
+      precedenceTable[this.curToken?.type as PrecedenceTableKeyType] ||
       precedences.LOWEST
     );
   }
@@ -77,7 +176,7 @@ export default class Parser {
   }
 
   peekTokenIs(t: TokenType): boolean {
-    return this.peekToken.type == t;
+    return this.peekToken.type === t;
   }
 
   peekPrecedence(): number {

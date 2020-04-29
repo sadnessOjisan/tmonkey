@@ -1,7 +1,19 @@
 import { Statement } from "./Node";
 
 export default class Program {
-  constructor(private statements: Statement[]) {}
+  private constructor(private _statements: Statement[]) {}
+
+  static of(statements: Statement[]): Program {
+    return new Program(statements);
+  }
+
+  get statements(): Statement[] {
+    return this._statements;
+  }
+
+  set statements(statements: Statement[]) {
+    this._statements;
+  }
 
   tokenLiteral(): string {
     if (this.statements.length > 0) {

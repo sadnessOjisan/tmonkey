@@ -2,7 +2,12 @@ import { Token } from "../token/token ";
 import { Expression, Statement } from "./Node";
 
 export default class ExpressionStatement implements Statement {
-  constructor(private token: Token, private expression: Expression) {}
+  constructor(private token: Token, private _expression?: Expression) {}
+
+  set expression(expression: Expression | undefined) {
+    if (!expression) throw new Error("no undefined");
+    this._expression = expression;
+  }
 
   statementNode(): void {
     return;
@@ -13,6 +18,6 @@ export default class ExpressionStatement implements Statement {
   }
 
   toString(): string {
-    return `${this.expression != null ? this.expression.toString() : ""}`;
+    return `${this._expression != null ? this.expression.toString() : ""}`;
   }
 }

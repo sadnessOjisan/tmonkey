@@ -2,7 +2,11 @@ import { Token } from "../token/token ";
 import { Expression, Statement } from "./Node";
 
 export default class ReturnStatement implements Statement {
-  constructor(private token: Token, private returnValue: Expression) {}
+  constructor(private token: Token, private _returnValue?: Expression) {}
+
+  set returnValue(returnValue: Expression | undefined) {
+    this._returnValue = returnValue;
+  }
 
   statementNode(): void {
     return;
@@ -13,6 +17,6 @@ export default class ReturnStatement implements Statement {
   }
 
   toString(): string {
-    return `${this.tokenLiteral()} ${this.returnValue.toString()};`;
+    return `${this.tokenLiteral()} ${this._returnValue?.toString()};`;
   }
 }
