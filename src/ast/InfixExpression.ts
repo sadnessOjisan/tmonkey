@@ -2,12 +2,21 @@ import { Token } from "../token/token ";
 import { Expression } from "./Node";
 
 export default class InfixExpression implements Expression {
-  constructor(
+  private constructor(
     private token: Token,
-    private left: Expression,
     private operator: string,
-    private right: Expression
+    private left: Expression,
+    private right?: Expression
   ) {}
+
+  static of(
+    token: Token,
+    operator: string,
+    left: Expression,
+    right?: Expression
+  ): InfixExpression {
+    return new InfixExpression(token, operator, left, right);
+  }
 
   expressionNode(): void {
     return;
@@ -20,6 +29,10 @@ export default class InfixExpression implements Expression {
   toString(): string {
     return `(${this.left.toString()}" "${
       this.operator
-    }" "${this.right.toString()})`;
+    }" "${this.right?.toString()})`;
+  }
+
+  setRight(expression: Expression): void {
+    this.right = expression;
   }
 }

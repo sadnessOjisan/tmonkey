@@ -59,6 +59,7 @@ export const keywords = {
 };
 
 type ValuesOf<T extends { [key: string]: unknown }> = T[keyof T];
+export type TokenKey = keyof Token;
 export type TokenSetType = typeof token;
 type KeyWordsKeyType = keyof typeof keywords;
 export type TokenType = ValuesOf<TokenSetType>;
