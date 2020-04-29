@@ -1,8 +1,8 @@
 import { Token } from "../token/token ";
 import { Expression } from "./Node";
-import { BlockStatement } from "./BlockStatement";
+import BlockStatement from "./BlockStatement";
 
-export class IfExpression implements Expression {
+export default class IfExpression implements Expression {
   constructor(
     private token: Token,
     private condition: Expression,

@@ -1,9 +1,9 @@
 import { Token } from "../token/token ";
 import { Expression } from "./Node";
-import { BlockStatement } from "./BlockStatement";
-import { Identifier } from "./Identifier";
+import BlockStatement from "./BlockStatement";
+import Identifier from "./Identifier";
 
-export class IfExpression implements Expression {
+export default class IfExpression implements Expression {
   constructor(
     private token: Token,
     private parameters: Identifier[],

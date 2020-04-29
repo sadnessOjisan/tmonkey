@@ -1,7 +1,7 @@
 import { Token } from "../token/token ";
 import { Expression } from "./Node";
 
-export class IntegerLiteral implements Expression {
+export default class IntegerLiteral implements Expression {
   constructor(private token: Token, private value: number) {}
 
   expressionNode(): void {

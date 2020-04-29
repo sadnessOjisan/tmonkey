@@ -1,7 +1,7 @@
 import { Token } from "../token/token ";
 import { Expression } from "./Node";
 
-export class InfixExpression implements Expression {
+export default class InfixExpression implements Expression {
   constructor(
     private token: Token,
     private left: Expression,

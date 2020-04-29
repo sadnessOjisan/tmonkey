@@ -1,8 +1,7 @@
 import { Token } from "../token/token ";
 import { Expression } from "./Node";
-import { BlockStatement } from "./BlockStatement";
 
-export class CallExpression implements Expression {
+export default class CallExpression implements Expression {
   constructor(
     private token: Token,
     private func: Expression, // function is reserved

@@ -1,6 +1,6 @@
 import { Statement } from "./Node";
 
-export class Program {
+export default class Program {
   constructor(private statements: Statement[]) {}
 
   tokenLiteral(): string {
