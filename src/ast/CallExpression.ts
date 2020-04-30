@@ -2,6 +2,7 @@ import { Token } from "../token/token ";
 import { Expression } from "./Node";
 
 export default class CallExpression implements Expression {
+  public readonly nodeType = CallExpression;
   constructor(
     private token: Token,
     private func: Expression, // function is reserved

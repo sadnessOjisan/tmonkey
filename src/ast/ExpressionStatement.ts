@@ -2,6 +2,7 @@ import { Token } from "../token/token ";
 import { Expression, Statement } from "./Node";
 
 export default class ExpressionStatement implements Statement {
+  public readonly nodeType = ExpressionStatement;
   constructor(private token?: Token, private _expression?: Expression) {}
 
   set expression(expression: Expression | undefined) {
