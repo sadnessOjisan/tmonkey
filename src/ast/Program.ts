@@ -12,7 +12,7 @@ export default class Program {
   }
 
   set statements(statements: Statement[]) {
-    this._statements;
+    this._statements = statements;
   }
 
   tokenLiteral(): string {

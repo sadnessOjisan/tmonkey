@@ -4,20 +4,21 @@ import Parser from "../parser/parser";
 
 const PROMPT = ">> ";
 
-export const start = () => {
+export const start = (): void => {
   const stdIn = fs.readFileSync("/dev/stdin", "utf8");
-  while (true) {
+  console.log("stdIn", stdIn);
+  for (;;) {
     console.log(PROMPT);
     if (!stdIn) {
       return;
     }
-    const line = `aaaaa`;
-    const l = Lexer.of(line);
-    const p = Parser.of(l);
+    const line = `let`;
+    const lexer = Lexer.of(line);
+    const perser = Parser.of(lexer);
 
-    const program = p.parseProgram();
-    if (p.errors.length !== 0) {
-      console.log(p.errors);
+    const program = perser.parseProgram();
+    if (perser.errors.length !== 0) {
+      console.log(perser.errors);
       continue;
     }
     console.log(program);

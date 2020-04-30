@@ -17,7 +17,7 @@ export default class LetStatement implements Statement {
     this._name = name;
   }
 
-  set value(value: Expression) {
+  set value(value: Expression | undefined) {
     this._value = value;
   }
 

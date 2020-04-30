@@ -2,10 +2,9 @@ import { Token } from "../token/token ";
 import { Expression, Statement } from "./Node";
 
 export default class ExpressionStatement implements Statement {
-  constructor(private token: Token, private _expression?: Expression) {}
+  constructor(private token?: Token, private _expression?: Expression) {}
 
   set expression(expression: Expression | undefined) {
-    if (!expression) throw new Error("no undefined");
     this._expression = expression;
   }
 
@@ -14,10 +13,10 @@ export default class ExpressionStatement implements Statement {
   }
 
   tokenLiteral(): string {
-    return this.token.literal;
+    return this.token ? this.token.literal : "";
   }
 
   toString(): string {
-    return `${this._expression != null ? this.expression.toString() : ""}`;
+    return `${this._expression != null ? this._expression.toString() : ""}`;
   }
 }

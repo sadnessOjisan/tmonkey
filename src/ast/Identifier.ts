@@ -2,9 +2,9 @@ import { Token } from "../token/token ";
 import { Expression } from "./Node";
 
 export default class Identifier implements Expression {
-  private constructor(private token: Token, private value: string) {}
+  private constructor(private token?: Token, private value?: string) {}
 
-  static of(token: Token, value: string): Identifier {
+  static of(token?: Token, value?: string): Identifier {
     return new Identifier(token, value);
   }
 
@@ -13,10 +13,10 @@ export default class Identifier implements Expression {
   }
 
   tokenLiteral(): string {
-    return this.token.literal;
+    return this.token ? this.token.literal : "";
   }
 
   toString(): string {
-    return this.value;
+    return this.value ? this.value : "";
   }
 }
