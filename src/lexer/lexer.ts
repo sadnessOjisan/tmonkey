@@ -1,12 +1,6 @@
 /* eslint-disable no-fallthrough, @typescript-eslint/ban-ts-ignore */
 
-import {
-  Token,
-  token,
-  lookupIdent,
-  strToTokenType,
-  tokenValues,
-} from "../token/token ";
+import { Token, token, lookupIdent, strToTokenType } from "../token/token ";
 
 export class Lexer {
   constructor(
@@ -18,9 +12,9 @@ export class Lexer {
 
   static of(
     input: string,
-    position: number,
-    readPosition: number,
-    ch: string
+    position?: number,
+    readPosition?: number,
+    ch?: string
   ): Lexer {
     return new Lexer(input, position, readPosition, ch);
   }
