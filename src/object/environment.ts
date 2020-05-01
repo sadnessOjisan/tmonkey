@@ -21,7 +21,7 @@ export default class Environment {
   }
 
   set(name: string, val: Obj): Obj {
-    e.store[name] = val;
+    this.store[name] = val;
     return val;
   }
 }
