@@ -23,6 +23,10 @@ export default class IfExpression implements Expression {
     this._alternative = alternative;
   }
 
+  get condition() {
+    return this._condition;
+  }
+
   set condition(condition: Expression | undefined) {
     this._condition = condition;
   }

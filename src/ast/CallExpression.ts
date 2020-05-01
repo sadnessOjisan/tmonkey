@@ -5,9 +5,17 @@ export default class CallExpression implements Expression {
   public readonly nodeType = CallExpression;
   constructor(
     private token: Token,
-    private func: Expression, // function is reserved
-    private args: Expression[] // arguments is reserved
+    private _func: Expression, // function is reserved
+    private _args: Expression[] // arguments is reserved
   ) {}
+
+  get func(): Expression {
+    return this._func;
+  }
+
+  get args(): Expression[] {
+    return this._args;
+  }
 
   expressionNode(): void {
     return;

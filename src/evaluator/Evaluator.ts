@@ -1,5 +1,5 @@
-import { Node, TNode } from "../ast/Node";
-import { ReturnValue, Integer } from "../object/object";
+import { Node, TNode, Expression } from "../ast/Node";
+import { ReturnValue, Integer, Obj, objectType, Null, ErrorO ,BooleanO} from "../object/object";
 import IntegerLiteral from "../ast/IntegerLiteral";
 import Program from "../ast/Program";
 import BlockStatement from "../ast/BlockStatement";
@@ -13,110 +13,42 @@ import IfExpression from "../ast/IfExpression";
 import Identifier from "../ast/Identifier";
 import FunctionLiteral from "../ast/FunctionLiteral";
 import CallExpression from "../ast/CallExpression";
+import Environment from "../object/environment";
 
-const evaluate = (node: Node, env: any): any => {
-  switch (node.nodeType) {
-    // Statements
-    case Program:
-      return evalProgram(node as Program, env);
-    case BlockStatement:
-      return evalBlockStatement(node, env);
-    case ExpressionStatement:
-      return Eval((node as ExpressionStatement).expression, env);
-    case ReturnStatement:
-      const val = evaluate((node as ReturnStatement).returnValue, env);
-      if (isError(val)) {
-        return val;
-      }
-      return ReturnValue.of(val);
-    case LetStatement:
-      const val = evaluate(node.value, env);
-      if (isError(val)) {
-        return val;
-      }
-      env.Set(node.Name.Value, val);
-    // Expressions
-    case IntegerLiteral:
-      return Integer.of(node.value);
-
-    case Boolean2:
-      return nativeBoolToBooleanObject(node.Value);
-
-    case PrefixExpression:
-      const right = evaluate(node.Right, env);
-      if (isError(right)) {
-        return right;
-      }
-      return evalPrefixExpression(node.Operator, right);
-
-    case InfixExpression:
-      const left = evaluate(node.Left, env);
-      if (isError(left)) {
-        return left;
-      }
-
-      const right = Eval(node.Right, env);
-      if (isError(right)) {
-        return right;
-      }
-
-      return evalInfixExpression(node.Operator, left, right);
-
-    case IfExpression:
-      return evalIfExpression(node, env);
-
-    case Identifier:
-      return evalIdentifier(node, env);
-
-    case FunctionLiteral:
-      const params = node.parameters;
-      const body = node.body;
-      return Function2.of(params, env, body);
-
-    case CallExpression:
-      const fn = Eval(node.Function, env);
-      if (isError(fn)) {
-        return fn;
-      }
-
-      const args = evalExpressions(node.Arguments, env);
-      if (args.length == 1 && isError(args[0])) {
-        return args[0];
-      }
-
-      return applyFunction(fn, args);
-  }
-
-  return undefined;
-};
+const NULL = Null.of();
+const TRUE = BooleanO.of( true);
+const FALSE = BooleanO.of( false);
 
 const evalProgram = (program: Program, env: Environment): Obj => {
-  var result: Obj;
+  let result = (null as any) as Obj;
   for (const statement of program.statements) {
     result = evaluate(statement, env);
-
-    switch (result.type) {
-      case ReturnValue:
-        result = result.Value;
+    switch (result.type()) {
+      case objectType.RETURN_VALUE_OBJ:
+        result = (result as ReturnValue).value;
         break;
-      case Error:
+      case objectType.ERROR_OBJ:
         result = result;
         break;
     }
+  }
+
+  if (!result) {
+    throw new Error();
   }
 
   return result;
 };
 
 const evalBlockStatement = (block: BlockStatement, env: Environment): Obj => {
-  var result: Obj;
+  let result = (null as any) as Obj;
 
   for (const statement of block.statements) {
     result = evaluate(statement, env);
 
     if (result != undefined) {
-      const rt = result.Type();
-      if (rt == object.RETURN_VALUE_OBJ || rt == object.ERROR_OBJ) {
+      const rt = result.type();
+      if (rt == objectType.RETURN_VALUE_OBJ || rt == objectType.ERROR_OBJ) {
         return result;
       }
     }
@@ -124,11 +56,11 @@ const evalBlockStatement = (block: BlockStatement, env: Environment): Obj => {
   return result;
 };
 
-const nativeBoolToBooleanObject = (input: boolean): Boolean => {
+const nativeBoolToBooleanObject = (input: boolean): BooleanO => {
   if (input) {
-    return object.TRUE;
+    return TRUE;
   }
-  return object.FALSE;
+  return FALSE;
 };
 
 const evalPrefixExpression = (operator: string, right: Obj): Obj => {
@@ -138,30 +70,27 @@ const evalPrefixExpression = (operator: string, right: Obj): Obj => {
     case "-":
       return evalMinusPrefixOperatorExpression(right);
     default:
-      return newError("unknown operator: %s%s", operator, right.Type());
+      return newError("unknown operator: %s%s");
   }
 };
 
 const evalInfixExpression = (operator: string, left: Obj, right: Obj): Obj => {
-  if (left.Type() == object.INTEGER_OBJ && right.Type() == object.INTEGER_OBJ) {
+  if (
+    left.type() == objectType.INTEGER_OBJ &&
+    right.type() == objectType.INTEGER_OBJ
+  ) {
     return evalIntegerInfixExpression(operator, left, right);
   } else if (operator == "==") {
     return nativeBoolToBooleanObject(left == right);
   } else if (operator == "!=") {
     return nativeBoolToBooleanObject(left != right);
-  } else if (left.Type() != right.Type()) {
+  } else if (left.type() != right.type()) {
     return newError(
-      "type mismatch: %s %s %s",
-      left.Type(),
-      operator,
-      right.Type()
+      "type mismatch: %s %s %s"
     );
   } else {
     return newError(
       "unknown operator: %s %s %s",
-      left.Type(),
-      operator,
-      right.Type()
     );
   }
 };
@@ -180,20 +109,20 @@ const evalBangOperatorExpression = (right: Obj): Obj => {
 };
 
 const evalMinusPrefixOperatorExpression = (right: Obj): Obj => {
-  if (right.Type() != object.INTEGER_OBJ) {
-    return newError("unknown operator: -%s", right.Type());
+  if (right.type() != objectType.INTEGER_OBJ) {
+    return newError("unknown operator: -%s");
   }
-  const value = right.Integer.Value;
+  const value = right.ingetger.value;
   return Integer.of(-1 * value);
 };
 
 const evalIntegerInfixExpression = (
   operator: string,
-  left,
+  left: Obj,
   right: Obj
 ): Obj => {
-  const leftVal = left.Integer.Value;
-  const rightVal = right.Integer.Value;
+  const leftVal = left.ingetger.value;
+  const rightVal = right.ingetger.value;
 
   switch (operator) {
     case "+":
@@ -214,28 +143,28 @@ const evalIntegerInfixExpression = (
       return nativeBoolToBooleanObject(leftVal != rightVal);
     default:
       return newError(
-        `unknown operator: ${left.Type()} ${operator} ${right.Type()}`
+        `unknown operator: ${left.type()} ${operator} ${right.type()}`
       );
   }
 };
 
 const evalIfExpression = (ie: IfExpression, env: Environment): Obj => {
-  const condition = evaluate(ie.Condition, env);
+  const condition = evaluate(ie.condition, env);
   if (isError(condition)) {
     return condition;
   }
 
   if (isTruthy(condition)) {
-    return evaluate(ie.Consequence, env);
-  } else if (ie.Alternative != nil) {
-    return evaluate(ie.Alternative, env);
+    return evaluate(ie.consequence, env);
+  } else if (ie.alternative != undefined) {
+    return evaluate(ie.alternative, env);
   } else {
     return NULL;
   }
 };
 
 const evalIdentifier = (node: Identifier, env: Environment): Obj => {
-  const val = env.Get(node.Value);
+  const val = env.get(node.value);
   if (!val) {
     return newError("identifier not found: " + node.Value);
   }
@@ -243,7 +172,7 @@ const evalIdentifier = (node: Identifier, env: Environment): Obj => {
   return val;
 };
 
-const isTruthy = (obj: Obj): bool => {
+const isTruthy = (obj: Obj): boolean => {
   switch (obj) {
     case NULL:
       return false;
@@ -256,13 +185,13 @@ const isTruthy = (obj: Obj): bool => {
   }
 };
 
-const newError = (format: string): Error2 => {
-  return Error2.of(format);
+const newError = (format: string): ErrorO => {
+  return ErrorO.of(format);
 };
 
 const isError = (obj: Obj): boolean => {
   if (obj != undefined) {
-    return obj.Type() == object.ERROR_OBJ;
+    return obj.type() == objectType.ERROR_OBJ;
   }
   return false;
 };
@@ -272,7 +201,7 @@ const evalExpressions = (exps: Expression[], env: Environment): Obj[] => {
   for (const e of exps) {
     const evaluated = evaluate(e, env);
     if (isError(evaluated)) {
-      return Obj.of(evaluated);
+      return [{type: ()=>"", inspect: ()=>""}]
     }
     result = [...result, evaluated];
   }
@@ -302,6 +231,83 @@ const extendFunctionEnv = (fn: Function, args: Obj[]): Environment => {
   return env;
 };
 
-const unwrapReturnValue = (obj: Obj): Obj => {
+const unwrapReturnValue = (obj: any): Obj => {
   return obj.retunValue || obj;
 };
+
+
+const evaluate = (node: Node, env: Environment): any => {
+    switch (node.nodeType) {
+      // Statements
+      case Program:
+        return evalProgram(node as Program, env);
+      case BlockStatement:
+        return evalBlockStatement(node as BlockStatement, env);
+      case ExpressionStatement:
+        return evaluate((node as ExpressionStatement).expression, env);
+      case ReturnStatement:
+        const val = evaluate((node as ReturnStatement).returnValue, env);
+        if (isError(val)) {
+          return val;
+        }
+        return ReturnValue.of(val);
+      case LetStatement:
+        if (isError(evaluate((node as LetStatement).value, env))) {
+          return val;
+        }
+        env.set((node as LetStatement).name.value, val);
+      // Expressions
+      case IntegerLiteral:
+        return Integer.of(node.value);
+  
+      case Boolean2:
+        return nativeBoolToBooleanObject(node.Value);
+  
+      case PrefixExpression:
+        const right = evaluate(node.Right, env);
+        if (isError(right)) {
+          return right;
+        }
+        return evalPrefixExpression(node.Operator, right);
+  
+      case InfixExpression:
+        const left = evaluate(node.Left, env);
+        if (isError(left)) {
+          return left;
+        }
+  
+        const right = evaluate(node.Right, env);
+        if (isError(right)) {
+          return right;
+        }
+  
+        return evalInfixExpression(node.Operator, left, right);
+  
+      case IfExpression:
+        return evalIfExpression(node as IfExpression, env);
+  
+      case Identifier:
+        return evalIdentifier(node as Identifier, env);
+  
+      case FunctionLiteral:
+        return Function2.of(
+          (node as FunctionLiteral).parameters,
+          env,
+          (node as FunctionLiteral).body
+        );
+  
+      case CallExpression:
+        if (isError(evaluate((node as CallExpression).func, env))) {
+          return (node as CallExpression).func;
+        }
+  
+        if ((node as CallExpression).args.length == 1 && isError(arevalExpressions((node as CallExpression).args, env)gs[0])) {
+          return (node as CallExpression).args[0];
+        }
+  
+        return applyFunction((node as CallExpression).func, (node as CallExpression).args);
+    }
+  
+    return undefined;
+  };
+  

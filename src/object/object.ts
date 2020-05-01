@@ -2,7 +2,7 @@ import Identifier from "../ast/Identifier";
 import BlockStatement from "../ast/BlockStatement";
 import Environment from "./environment";
 
-const objectType = {
+export const objectType = {
   NULL_OBJ: "NULL",
   ERROR_OBJ: "ERROR",
   INTEGER_OBJ: "INTEGER",
@@ -35,9 +35,9 @@ export class Integer implements Obj {
 }
 
 export class BooleanO implements Obj {
-  private constructor(private value: number) {}
+  private constructor(private value: boolean) {}
 
-  static of(value: number): BooleanO {
+  static of(value: boolean): BooleanO {
     return new BooleanO(value);
   }
 
@@ -65,7 +65,11 @@ export class Null implements Obj {
 }
 
 export class ReturnValue implements Obj {
-  private constructor(private value: Obj) {}
+  private constructor(private _value: Obj) {}
+
+  get value(): Obj {
+    return this._value;
+  }
 
   static of(value: Obj): ReturnValue {
     return new ReturnValue(value);
@@ -83,8 +87,8 @@ export class ReturnValue implements Obj {
 export class ErrorO implements Obj {
   private constructor(private message: string) {}
 
-  static of(message: string): Error {
-    return new Error(message);
+  static of(message: string): ErrorO {
+    return new ErrorO(message);
   }
 
   type(): ObjectType {
