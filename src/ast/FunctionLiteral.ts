@@ -4,6 +4,7 @@ import BlockStatement from "./BlockStatement";
 import Identifier from "./Identifier";
 
 export default class FunctionLiteral implements Expression {
+  public readonly nodeType = FunctionLiteral;
   private constructor(
     private token?: Token,
     private _parameters?: Identifier[],

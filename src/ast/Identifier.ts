@@ -2,7 +2,8 @@ import { Token } from "../token/token ";
 import { Expression } from "./Node";
 
 export default class Identifier implements Expression {
-  private constructor(private token?: Token, private value?: string) {}
+  public readonly nodeType = Identifier;
+  private constructor(private token?: Token, public value?: string) {}
 
   static of(token?: Token, value?: string): Identifier {
     return new Identifier(token, value);

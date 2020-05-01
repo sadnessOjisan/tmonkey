@@ -3,6 +3,7 @@ import { Expression, Statement } from "./Node";
 import Identifier from "./Identifier";
 
 export default class LetStatement implements Statement {
+  public readonly nodeType = LetStatement;
   constructor(
     private token: Token,
     private _name?: Identifier,

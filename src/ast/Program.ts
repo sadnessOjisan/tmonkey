@@ -1,6 +1,7 @@
 import { Statement } from "./Node";
 
 export default class Program {
+  public readonly nodeType = Program;
   private constructor(private _statements: Statement[]) {}
 
   static of(statements: Statement[]): Program {

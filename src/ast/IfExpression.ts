@@ -3,6 +3,7 @@ import { Expression } from "./Node";
 import BlockStatement from "./BlockStatement";
 
 export default class IfExpression implements Expression {
+  public readonly nodeType = IfExpression;
   constructor(
     private token?: Token,
     private _condition?: Expression,
@@ -20,6 +21,10 @@ export default class IfExpression implements Expression {
 
   set alternative(alternative: BlockStatement | undefined) {
     this._alternative = alternative;
+  }
+
+  get condition() {
+    return this._condition;
   }
 
   set condition(condition: Expression | undefined) {

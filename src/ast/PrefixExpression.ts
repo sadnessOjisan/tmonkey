@@ -2,6 +2,7 @@ import { Token } from "../token/token ";
 import { Expression } from "./Node";
 
 export default class PrefixExpression implements Expression {
+  public readonly nodeType = PrefixExpression;
   private constructor(
     private token?: Token,
     private operator?: string,

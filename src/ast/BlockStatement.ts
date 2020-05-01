@@ -2,6 +2,8 @@ import { Token } from "../token/token ";
 import { Statement } from "./Node";
 
 export default class BlockStatement implements Statement {
+  public readonly nodeType = BlockStatement;
+
   private constructor(
     private token?: Token,
     private _statements?: Statement[]
