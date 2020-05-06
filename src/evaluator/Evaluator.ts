@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
 
-import { Node, TNode, Expression } from "../ast/Node";
+import { TNode, TExpression } from "../ast/Node";
 import {
   ReturnValue,
   Integer,
@@ -31,7 +31,23 @@ const TRUE = BooleanO.of(true);
 const FALSE = BooleanO.of(false);
 
 const evalProgram = (program: Program, env: Environment): Obj => {
-  // no op
+  let result;
+
+  for (const statement of program.statements) {
+    result = evaluate(statement, env);
+    if (result instanceof ReturnValue) {
+      return result.value;
+    } else if (result instanceof ErrorO) {
+      return result;
+    }
+    // TODO: 式だけの場合ここで値を返してもいいかも
+  }
+
+  if (!result) {
+    throw new Error("no program");
+  }
+
+  return result;
 };
 
 /**
@@ -40,7 +56,20 @@ const evalProgram = (program: Program, env: Environment): Obj => {
  * @param env
  */
 const evalBlockStatement = (block: BlockStatement, env: Environment): Obj => {
-  // no op
+  let result;
+
+  for (const statement of block.statements) {
+    result = evaluate(statement, env);
+
+    if (result != undefined) {
+      const rt = result.type();
+      if (rt == objectType.RETURN_VALUE_OBJ || rt == objectType.ERROR_OBJ) {
+        return result;
+      }
+    }
+  }
+  // TODO: ここがnullのときどうする？
+  return result as Obj;
 };
 
 /**
@@ -48,7 +77,10 @@ const evalBlockStatement = (block: BlockStatement, env: Environment): Obj => {
  * @param input boolean
  */
 const nativeBoolToBooleanObject = (input: boolean): BooleanO => {
-  // no op
+  if (input) {
+    return TRUE;
+  }
+  return FALSE;
 };
 
 /**
@@ -58,33 +90,106 @@ const nativeBoolToBooleanObject = (input: boolean): BooleanO => {
  * @param right
  */
 const evalPrefixExpression = (operator: string, right: Obj): Obj => {
-  // no op
+  switch (operator) {
+    case "!":
+      return evalBangOperatorExpression(right);
+    case "-":
+      return evalMinusPrefixOperatorExpression(right);
+    default:
+      return newError("unknown operator");
+  }
 };
 
 /**
- * 中値演算子を評価する
+ * 中値演算子を評価する. 数字の足し算、左右の比較をサポート
  * @param operator
  * @param left
  * @param right
  */
 const evalInfixExpression = (operator: string, left: Obj, right: Obj): Obj => {
-  // no op
+  if (
+    left.type() == objectType.INTEGER_OBJ &&
+    right.type() == objectType.INTEGER_OBJ
+  ) {
+    return evalIntegerInfixExpression(operator, left, right);
+  } else if (operator == "==") {
+    return nativeBoolToBooleanObject(left == right);
+  } else if (operator == "!=") {
+    return nativeBoolToBooleanObject(left != right);
+  } else if (left.type() != right.type()) {
+    return newError("type mismatch");
+  } else {
+    return newError("unknown operator");
+  }
 };
 
+/**
+ * !演算子によるbooleanの反転
+ * @param right
+ */
 const evalBangOperatorExpression = (right: Obj): Obj => {
-  // no op
+  switch (right) {
+    case TRUE:
+      return FALSE;
+    case FALSE:
+      return TRUE;
+    case NULL:
+      return TRUE;
+    default:
+      return FALSE;
+  }
 };
 
+/**
+ * -演算子による数値の反転
+ * @param right
+ */
 const evalMinusPrefixOperatorExpression = (right: Obj): Obj => {
-  // no op
+  if (!(right instanceof Integer)) {
+    return newError("unknown operator");
+  }
+
+  return Integer.of(-1 * right.value);
 };
 
+/**
+ * 中値演算子を評価
+ * @param operator
+ * @param left
+ * @param right
+ */
 const evalIntegerInfixExpression = (
   operator: string,
   left: Obj,
   right: Obj
 ): Obj => {
-  // no op
+  if (!(right instanceof Integer && left instanceof Integer)) {
+    return newError("unknown operator");
+  }
+
+  const leftVal = left.value;
+  const rightVal = right.value;
+
+  switch (operator) {
+    case "+":
+      return Integer.of(leftVal + rightVal);
+    case "-":
+      return Integer.of(leftVal - rightVal);
+    case "*":
+      return Integer.of(leftVal * rightVal);
+    case "/":
+      return Integer.of(leftVal / rightVal);
+    case "<":
+      return nativeBoolToBooleanObject(leftVal < rightVal);
+    case ">":
+      return nativeBoolToBooleanObject(leftVal > rightVal);
+    case "==":
+      return nativeBoolToBooleanObject(leftVal == rightVal);
+    case "!=":
+      return nativeBoolToBooleanObject(leftVal != rightVal);
+    default:
+      return newError("unknown operator");
+  }
 };
 
 const evalIfExpression = (ie: IfExpression, env: Environment): Obj => {
@@ -111,37 +216,87 @@ const evalIdentifier = (node: Identifier, env: Environment): Obj => {
   return val;
 };
 
-const isTruthy = (obj: TNode): boolean => {
-  // no op
+const isTruthy = (obj: Obj): boolean => {
+  switch (obj) {
+    case NULL:
+      return false;
+    case TRUE:
+      return true;
+    case FALSE:
+      return false;
+    default:
+      return true;
+  }
 };
 
 const newError = (format: string): ErrorO => {
-  // no op
-};
-
-const isError = (obj: Obj): boolean => {
-  // no op
+  return ErrorO.of(format);
 };
 
 /**
- * 式を評価する
+ * objectがエラーかどうかを判定する
+ * @param obj
+ */
+const isError = (obj: Obj): boolean => {
+  if (obj != undefined) {
+    return obj.type() == objectType.ERROR_OBJ;
+  }
+  return false;
+};
+
+/**
+ * 式のリストを評価する. 関数の引数の評価に使う
  * @param exps
  * @param env
  */
-const evalExpressions = (exps: Expression[], env: Environment): Obj[] => {
-  // no op
+const evalExpressions = (exps: TExpression[], env: Environment): Obj[] => {
+  let result = [] as Obj[];
+
+  for (const exp of exps) {
+    const evaluated = evaluate(exp, env);
+    if (isError(evaluated)) {
+      return [evaluated];
+    }
+    result = [...result, evaluated];
+  }
+  return result;
 };
 
+/**
+ * 関数を実行して返す
+ * @param fn
+ * @param args
+ */
 const applyFunction = (fn: Obj, args: Obj[]): Obj => {
-  // no op
+  if (!(fn instanceof Function)) {
+    return newError("not a function");
+  }
+
+  const extendedEnv = extendFunctionEnv(fn, args);
+  const evaluated = evaluate(fn.body, extendedEnv);
+  return unwrapReturnValue(evaluated);
 };
 
+/**
+ * 環境の拡張. closureの実現
+ * @param fn
+ * @param args
+ */
 const extendFunctionEnv = (fn: Function, args: Obj[]): Environment => {
-  // no op
+  const env = Environment.newEnclosedEnvironment(fn.env);
+  for (let idx = 0; idx < fn.parameters.length; idx++) {
+    const element = fn.parameters[idx];
+    env.set(element.value, args[idx]);
+  }
+  return env;
 };
 
+/**
+ * そのobjectがreturn valueを持ってたらreturn valueを返し、そうでないならobjctを返す
+ * @param obj
+ */
 const unwrapReturnValue = (obj: any): Obj => {
-  // no op
+  return obj.returnValue || obj;
 };
 
 /**
@@ -202,12 +357,10 @@ const evaluate = (node: TNode, env: Environment): Obj => {
     if (isError(fn)) {
       return fn;
     }
-
     const args = evalExpressions(node.args, env);
     if (args.length == 1 && isError(args[0])) {
       return args[0];
     }
-
     return applyFunction(fn, args);
   } else {
     throw new Error("unexpected");

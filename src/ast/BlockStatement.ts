@@ -1,23 +1,23 @@
 import { Token } from "../token/token ";
-import { Statement } from "./Node";
+import { Statement, TStatement } from "./Node";
 
 export default class BlockStatement implements Statement {
   public readonly nodeType = BlockStatement;
 
   private constructor(
     private token?: Token, // { が当てはまるはず
-    private _statements?: Statement[]
+    private _statements?: TStatement[]
   ) {}
 
-  static of(token?: Token, statements?: Statement[]): BlockStatement {
+  static of(token?: Token, statements?: TStatement[]): BlockStatement {
     return new BlockStatement(token, statements);
   }
 
-  get statements(): Statement[] {
+  get statements(): TStatement[] {
     return this._statements || [];
   }
 
-  set statements(statements: Statement[]) {
+  set statements(statements: TStatement[]) {
     this._statements = statements;
   }
 

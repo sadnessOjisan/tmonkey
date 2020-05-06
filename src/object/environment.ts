@@ -10,7 +10,7 @@ import { Obj } from "./object";
 export default class Environment {
   private constructor(
     private store: { [key: string]: Obj },
-    private outer: Environment
+    private outer?: Environment
   ) {}
 
   static of(store: any, outer: Environment): Environment {
@@ -30,5 +30,11 @@ export default class Environment {
   set(name: string, val: Obj): Obj {
     this.store[name] = val;
     return val;
+  }
+
+  static newEnclosedEnvironment(outer: Environment): Environment {
+    const env = new Environment({}, undefined);
+    env.outer = outer;
+    return env;
   }
 }

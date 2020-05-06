@@ -19,7 +19,11 @@ export interface Obj {
 }
 
 export class Integer implements Obj {
-  private constructor(private value: number) {}
+  private constructor(private _value: number) {}
+
+  get value(): number {
+    return this._value;
+  }
 
   static of(value: number): Integer {
     return new Integer(value);
@@ -30,7 +34,7 @@ export class Integer implements Obj {
   }
 
   inspect(): string {
-    return `${this.value}`;
+    return `${this._value}`;
   }
 }
 
@@ -102,9 +106,9 @@ export class ErrorO implements Obj {
 
 export class Function implements Obj {
   private constructor(
-    private parameters: Identifier[],
-    private body: BlockStatement,
-    private env: Environment
+    private _parameters: Identifier[],
+    private _body: BlockStatement,
+    private _env: Environment
   ) {}
 
   static of(
@@ -115,6 +119,17 @@ export class Function implements Obj {
     return new Function(parameters, body, env);
   }
 
+  get parameters(): Identifier[] {
+    return this._parameters;
+  }
+
+  get body(): BlockStatement {
+    return this._body;
+  }
+
+  get env(): Environment {
+    return this._env;
+  }
   type(): ObjectType {
     return objectType.FUNCTION_OBJ;
   }
