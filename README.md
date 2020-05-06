@@ -13,3 +13,13 @@ yarn start
 # production build
 yarn build
 ```
+
+documentation
+
+```sh
+# gen doc
+yarn typedoc
+
+# open doc
+oepn docs/index.html
+```
