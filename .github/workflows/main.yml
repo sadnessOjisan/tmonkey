@@ -25,6 +25,13 @@ jobs:
       - name: yarn lint
         run: |
           yarn lint:ci
+      - name: Build Doc
+        run: yarn typedoc
+      - name: Doc Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./docs
       - name: build
         run: |
           yarn build
