@@ -1,6 +1,8 @@
 # tmonkey
 
-monkey lang hosted by TypeScript.
+Monkeylang hosted by TypeScript.
+
+Thanks https://monkeylang.org/
 
 ## for develop
 
