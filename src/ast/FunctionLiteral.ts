@@ -6,20 +6,20 @@ import Identifier from "./Identifier";
 export default class FunctionLiteral implements Expression {
   public readonly nodeType = FunctionLiteral;
   private constructor(
-    private token?: Token,
+    private token: Token,
     private _parameters?: Identifier[],
     private _body?: BlockStatement
   ) {}
 
   static of(
-    token?: Token,
+    token: Token,
     parameters?: Identifier[],
     body?: BlockStatement
   ): FunctionLiteral {
     return new FunctionLiteral(token, parameters, body);
   }
 
-  set parameters(parameters: Identifier[] | undefined) {
+  set parameters(parameters: Identifier[]) {
     this._parameters = parameters;
   }
 

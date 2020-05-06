@@ -2,40 +2,52 @@ import { Token } from "../token/token ";
 import { Expression } from "./Node";
 import BlockStatement from "./BlockStatement";
 
+/**
+ * if文のAST NODE
+ */
 export default class IfExpression implements Expression {
   public readonly nodeType = IfExpression;
   constructor(
-    private token?: Token,
+    private token: Token,
     private _condition?: Expression,
     private _consequence?: BlockStatement,
     private _alternative?: BlockStatement
   ) {}
 
-  static of(token?: Token): IfExpression {
+  static of(token: Token): IfExpression {
     return new IfExpression(token);
   }
 
-  get alternative(): BlockStatement | undefined {
+  get alternative(): BlockStatement {
+    if (!this._alternative) {
+      throw new Error("no setted");
+    }
     return this._alternative;
   }
 
-  set alternative(alternative: BlockStatement | undefined) {
+  set alternative(alternative: BlockStatement) {
     this._alternative = alternative;
   }
 
-  get condition() {
+  get condition(): Expression {
+    if (!this._condition) {
+      throw new Error("no setted");
+    }
     return this._condition;
   }
 
-  set condition(condition: Expression | undefined) {
+  set condition(condition: Expression) {
     this._condition = condition;
   }
 
-  get consequence(): BlockStatement | undefined {
+  get consequence(): BlockStatement {
+    if (!this._consequence) {
+      throw new Error("no setted");
+    }
     return this._consequence;
   }
 
-  set consequence(consequence: BlockStatement | undefined) {
+  set consequence(consequence: BlockStatement) {
     this._consequence = consequence;
   }
 

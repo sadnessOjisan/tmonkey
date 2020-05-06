@@ -10,6 +10,9 @@ export default class IntegerLiteral implements Expression {
   }
 
   get value() {
+    if (!this._value) {
+      throw new Error("un inited value");
+    }
     return this._value;
   }
 

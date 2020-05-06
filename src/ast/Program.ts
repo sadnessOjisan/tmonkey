@@ -1,18 +1,18 @@
-import { Statement } from "./Node";
+import { TStatement } from "./Node";
 
 export default class Program {
   public readonly nodeType = Program;
-  private constructor(private _statements: Statement[]) {}
+  private constructor(private _statements: TStatement[]) {}
 
-  static of(statements: Statement[]): Program {
+  static of(statements: TStatement[]): Program {
     return new Program(statements);
   }
 
-  get statements(): Statement[] {
+  get statements(): TStatement[] {
     return this._statements;
   }
 
-  set statements(statements: Statement[]) {
+  set statements(statements: TStatement[]) {
     this._statements = statements;
   }
 

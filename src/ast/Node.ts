@@ -18,13 +18,36 @@ export interface Node {
   toString: () => string;
 }
 
+/**
+ * 文
+ */
 export interface Statement extends Node {
   statementNode: () => void;
 }
 
+/**
+ * 式
+ */
 export interface Expression extends Node {
   expressionNode: () => void;
 }
+
+export type TStatement =
+  | Program
+  | BlockStatement
+  | ExpressionStatement
+  | ReturnStatement
+  | LetStatement;
+
+export type TExpression =
+  | IntegerLiteral
+  | Boolean2
+  | PrefixExpression
+  | InfixExpression
+  | IfExpression
+  | Identifier
+  | FunctionLiteral
+  | CallExpression;
 
 export type NodeType =
   | typeof BlockStatement
@@ -41,17 +64,4 @@ export type NodeType =
   | typeof Program
   | typeof ReturnStatement;
 
-export type TNode =
-  | BlockStatement
-  | Boolean2
-  | CallExpression
-  | ExpressionStatement
-  | FunctionLiteral
-  | Identifier
-  | IfExpression
-  | InfixExpression
-  | IntegerLiteral
-  | LetStatement
-  | PrefixExpression
-  | Program
-  | ReturnStatement;
+export type TNode = TStatement | TExpression;

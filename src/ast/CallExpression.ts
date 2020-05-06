@@ -1,19 +1,19 @@
 import { Token } from "../token/token ";
-import { Expression } from "./Node";
+import { Expression, TExpression } from "./Node";
 
 export default class CallExpression implements Expression {
   public readonly nodeType = CallExpression;
   constructor(
     private token: Token,
-    private _func: Expression, // function is reserved
-    private _args: Expression[] // arguments is reserved
+    private _func: TExpression, // function is reserved
+    private _args: TExpression[] // arguments is reserved
   ) {}
 
-  get func(): Expression {
+  get func(): TExpression {
     return this._func;
   }
 
-  get args(): Expression[] {
+  get args(): TExpression[] {
     return this._args;
   }
 
