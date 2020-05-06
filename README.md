@@ -1,6 +1,6 @@
 # tmonkey
 
-monkey lang hosted by TypeScript
+monkey lang hosted by TypeScript.
 
 ## for develop
 
