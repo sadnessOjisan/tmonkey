@@ -8,7 +8,16 @@ let add = fn(x, y) {
   x + y;
 };
 
-add(3, 4);
+let result = add(five, ten);
+
+if (5 < 10) {
+	return true;
+} else {
+	return false;
+}
+
+10 == 10;
+10 != 9;
 `;
 const lexer = Lexer.of(line);
 const perser = Parser.of(lexer);

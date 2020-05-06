@@ -9,6 +9,14 @@ export default class CallExpression implements Expression {
     private _args: TExpression[] // arguments is reserved
   ) {}
 
+  static of(
+    token: Token,
+    func: TExpression, // function is reserved
+    args: TExpression[]
+  ): CallExpression {
+    return new CallExpression(token, func, args);
+  }
+
   get func(): TExpression {
     return this._func;
   }
