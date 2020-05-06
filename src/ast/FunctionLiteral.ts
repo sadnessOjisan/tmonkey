@@ -19,8 +19,22 @@ export default class FunctionLiteral implements Expression {
     return new FunctionLiteral(token, parameters, body);
   }
 
+  get parameters(): Identifier[] {
+    if (!this._parameters) {
+      throw new Error("unsetted val");
+    }
+    return this._parameters;
+  }
+
   set parameters(parameters: Identifier[]) {
     this._parameters = parameters;
+  }
+
+  get body(): BlockStatement {
+    if (!this._body) {
+      throw new Error("unsetted");
+    }
+    return this._body;
   }
 
   set body(blockStatement: BlockStatement) {

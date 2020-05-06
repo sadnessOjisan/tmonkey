@@ -7,6 +7,8 @@ let ten = 10;
 let add = fn(x, y) {
   x + y;
 };
+
+add(five, ten);
 `;
 
 describe("", () => {
@@ -14,8 +16,7 @@ describe("", () => {
     test("return token", () => {
       const lexer = new Lexer(code);
       const parser = Parser.of(lexer);
-      const actual = parser.parseProgram();
-      expect(actual).toEqual({ type: "(", literal: "a" });
+      expect(() => parser.parseProgram()).not.toThrowError();
     });
   });
 });

@@ -13,7 +13,6 @@ import Program from "./Program";
 import ReturnStatement from "./ReturnStatement";
 
 export interface Node {
-  nodeType: NodeType; // TS require this because it dont have type assertion...
   tokenLiteral: () => string;
   toString: () => string;
 }
@@ -35,9 +34,9 @@ export interface Expression extends Node {
 export type TStatement =
   | Program
   | BlockStatement
-  | ExpressionStatement
   | ReturnStatement
-  | LetStatement;
+  | LetStatement
+  | ExpressionStatement;
 
 export type TExpression =
   | IntegerLiteral
@@ -48,20 +47,5 @@ export type TExpression =
   | Identifier
   | FunctionLiteral
   | CallExpression;
-
-export type NodeType =
-  | typeof BlockStatement
-  | typeof Boolean2
-  | typeof CallExpression
-  | typeof ExpressionStatement
-  | typeof FunctionLiteral
-  | typeof Identifier
-  | typeof IfExpression
-  | typeof InfixExpression
-  | typeof IntegerLiteral
-  | typeof LetStatement
-  | typeof PrefixExpression
-  | typeof Program
-  | typeof ReturnStatement;
 
 export type TNode = TStatement | TExpression;

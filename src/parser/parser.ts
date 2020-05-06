@@ -9,7 +9,6 @@ import {
   precedenceTable,
   precedences,
   PrecedenceTableKeyType,
-  PrecedencesKeyType,
 } from "./precedenceTable";
 import Program from "../ast/Program";
 import LetStatement from "../ast/LetStatement";
@@ -21,6 +20,7 @@ import IfExpression from "../ast/IfExpression";
 import BlockStatement from "../ast/BlockStatement";
 import Boolean from "../ast/Boolean";
 import FunctionLiteral from "../ast/FunctionLiteral";
+import CallExpression from "../ast/CallExpression";
 
 type PrefixParseFnsType = {
   [key in TokenType]: () => TExpression;
@@ -89,6 +89,9 @@ export default class Parser {
     this.registerInfix(token.GT, (left: TExpression) =>
       this.parseInfixExpression(left)
     );
+    this.registerInfix(token.LPAREN, (left: TExpression) =>
+      this.parseCallExpression(left)
+    );
   }
 
   /**
@@ -123,7 +126,7 @@ export default class Parser {
    * 文をparseする
    */
   parseStatement(): TStatement {
-    switch (this.curToken?.type) {
+    switch (this.curToken.type) {
       case token.LET:
         return this.parseLetStatement();
       case token.RETURN:
@@ -219,6 +222,9 @@ export default class Parser {
     return expression;
   }
 
+  /**
+   * block 節のparse
+   */
   parseBlockStatement() {
     const block = BlockStatement.of(this.curToken);
     block.statements = [];
@@ -322,8 +328,6 @@ export default class Parser {
   }
 
   parseReturnStatement(): ReturnStatement {
-    if (!this.curToken) throw new Error("undefined"); // FIXME: 本当に例外なげていい？
-
     const stmt = new ReturnStatement(this.curToken);
 
     this.nextToken();
@@ -337,6 +341,9 @@ export default class Parser {
     return stmt;
   }
 
+  /**
+   * 式文をparseする
+   */
   parseExpressionStatement(): ExpressionStatement {
     const stmt = new ExpressionStatement(this.curToken);
 
@@ -419,7 +426,6 @@ export default class Parser {
 
     // この時点でのprefixは前置演算子に対応する関数
     let leftExp = prefix();
-    console.log("precedence", precedence);
     console.log("this.peekPrecedence()", this.peekPrecedence());
     while (
       !this.peekTokenIs(token.SEMICOLON) &&
@@ -460,6 +466,43 @@ export default class Parser {
       expression.right = parsedExpression;
     }
     return expression;
+  }
+
+  /**
+   * 関数呼び出しをparseする
+   * @param fn
+   */
+  parseCallExpression(fn: TExpression): TExpression {
+    const args = this.parseCallArguments();
+    const exp = CallExpression.of(this.curToken, fn, args);
+    return exp;
+  }
+
+  /**
+   * 呼び出し式の引数をparseする
+   */
+  parseCallArguments(): TExpression[] {
+    let args = [] as TExpression[];
+
+    if (this.peekTokenIs(token.RPAREN)) {
+      this.nextToken();
+      return args;
+    }
+
+    this.nextToken();
+    args = [...args, this.parseExpression(precedences.LOWEST)];
+
+    while (this.peekTokenIs(token.COMMA)) {
+      this.nextToken();
+      this.nextToken();
+      args = [...args, this.parseExpression(precedences.LOWEST)];
+    }
+
+    if (!this.expectPeek(token.RPAREN)) {
+      throw new Error("un ended with }");
+    }
+
+    return args;
   }
 
   registerPrefix(tokenType: TokenType, fn: () => Expression | undefined): void {

@@ -34,6 +34,7 @@ const evalProgram = (program: Program, env: Environment): Obj => {
   let result;
 
   for (const statement of program.statements) {
+    console.info("<evalProgram> statement: ", statement);
     result = evaluate(statement, env);
     if (result instanceof ReturnValue) {
       return result.value;
@@ -193,7 +194,8 @@ const evalIntegerInfixExpression = (
 };
 
 const evalIfExpression = (ie: IfExpression, env: Environment): Obj => {
-  const condition = evaluate(ie, env);
+  console.log("<evalIfExpression> ie", ie);
+  const condition = evaluate(ie.condition, env);
   if (isError(condition)) {
     return condition;
   }
@@ -270,7 +272,7 @@ const applyFunction = (fn: Obj, args: Obj[]): Obj => {
   if (!(fn instanceof Function)) {
     return newError("not a function");
   }
-
+  console.info("<applyFunction> fn:", fn);
   const extendedEnv = extendFunctionEnv(fn, args);
   const evaluated = evaluate(fn.body, extendedEnv);
   return unwrapReturnValue(evaluated);
@@ -304,20 +306,23 @@ const unwrapReturnValue = (obj: any): Obj => {
  * @param env
  */
 export const evaluate = (node: TNode, env: Environment): any => {
+  console.info("<evaluate> node: ", node);
   if (node instanceof Program) {
+    console.info("<evaluate> node: ", node);
     return evalProgram(node, env); // ブロックの塊やネストされたブロックを評価する
   } else if (node instanceof BlockStatement) {
     return evalBlockStatement(node, env); // ブロック一つを評価する
   } else if (node instanceof ExpressionStatement) {
-    return evaluate(node, env); // 式を評価する
+    return evaluate(node.expression, env); // 式を評価する
   } else if (node instanceof ReturnStatement) {
-    const val = evaluate(node, env);
+    const val = evaluate(node.returnValue, env);
     if (isError(val)) {
       return val;
     }
     return ReturnValue.of(val);
   } else if (node instanceof LetStatement) {
-    const val = evaluate(node, env);
+    console.info("<evaluate> LetStatement: ", node);
+    const val = evaluate(node.value, env);
     if (isError(val)) {
       return val;
     }
@@ -348,10 +353,12 @@ export const evaluate = (node: TNode, env: Environment): any => {
   } else if (node instanceof Identifier) {
     return evalIdentifier(node, env);
   } else if (node instanceof FunctionLiteral) {
+    console.info("<FunctionLiteral> node:", node);
     const params = node.parameters;
     const body = node.body;
     return Function.of(params, body, env);
   } else if (node instanceof CallExpression) {
+    console.info("<CallExpression> node:", node);
     const fn = evaluate(node.func, env);
     if (isError(fn)) {
       return fn;
@@ -360,8 +367,11 @@ export const evaluate = (node: TNode, env: Environment): any => {
     if (args.length == 1 && isError(args[0])) {
       return args[0];
     }
+    console.info("<CallExpression> fn:", fn);
+    console.info("<CallExpression> args:", args);
     return applyFunction(fn, args);
   } else {
+    console.error("node:", node);
     throw new Error("unexpected");
   }
 };
