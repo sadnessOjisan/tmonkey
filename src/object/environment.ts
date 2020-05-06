@@ -13,7 +13,7 @@ export default class Environment {
     private outer?: Environment
   ) {}
 
-  static of(store: any, outer: Environment): Environment {
+  static of(store: any, outer?: Environment): Environment {
     return new Environment(store, outer);
   }
 

@@ -7,14 +7,14 @@ export default class FunctionLiteral implements Expression {
   public readonly nodeType = FunctionLiteral;
   private constructor(
     private token: Token,
-    private _parameters: Identifier[],
+    private _parameters?: Identifier[],
     private _body?: BlockStatement
   ) {}
 
   static of(
     token: Token,
-    parameters: Identifier[],
-    body: BlockStatement
+    parameters?: Identifier[],
+    body?: BlockStatement
   ): FunctionLiteral {
     return new FunctionLiteral(token, parameters, body);
   }

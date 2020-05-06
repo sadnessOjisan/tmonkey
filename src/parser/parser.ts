@@ -2,7 +2,7 @@
 
 import { Lexer } from "../lexer/lexer";
 import { Token, token, TokenType } from "../token/token ";
-import { Expression, Statement } from "../ast/Node";
+import { Expression, TExpression, TStatement } from "../ast/Node";
 import Identifier from "../ast/Identifier";
 import InfixExpression from "../ast/InfixExpression";
 import {
@@ -23,23 +23,37 @@ import Boolean from "../ast/Boolean";
 import FunctionLiteral from "../ast/FunctionLiteral";
 
 type PrefixParseFnsType = {
-  [key in TokenType]: () => Expression;
+  [key in TokenType]: () => TExpression;
 };
 
 type InfixParseFnsType = {
-  [key in TokenType]: (ex: Expression) => Expression;
+  [key in TokenType]: (ex: TExpression) => TExpression;
 };
 
 export default class Parser {
   private _errors: string[];
-  private curToken?: Token;
-  private peekToken?: Token;
+  /**
+   * 現在位置のtoken
+   */
+  private curToken: Token;
+  /**
+   * 次の位置のtoken. curtokenだけだと行末にあるものかどうかを識別できないので導入した
+   */
+  private peekToken: Token;
+  /**
+   * prefixとそれに対応するparse関数を保存するテーブル
+   */
   private prefixParseFns: PrefixParseFnsType;
+  /**
+   * infixとそれに対応するparse関数を保存するテーブル
+   */
   private infixParseFns: InfixParseFnsType;
-  constructor(private lexer: Lexer) {
+  constructor(private lexer: Lexer, curToken: Token, peekToken: Token) {
+    this.curToken = curToken;
+    this.peekToken = peekToken;
     this._errors = [];
     this.prefixParseFns = {} as PrefixParseFnsType;
-    // thisの束縛のため
+    // thisの束縛のためarrowを使う
     this.registerPrefix(token.IDENT, () => this.parseIdentifier());
     this.registerPrefix(token.INT, () => this.parseIntegerLiteral());
     this.registerPrefix(token.BANG, () => this.parsePrefixExpression());
@@ -51,37 +65,42 @@ export default class Parser {
     this.registerPrefix(token.FUNCTION, () => this.parseFunctionLiteral());
 
     this.infixParseFns = {} as InfixParseFnsType;
-    this.registerInfix(token.IDENT, (left: Expression) =>
+    this.registerInfix(token.PLUS, (left: TExpression) =>
       this.parseInfixExpression(left)
     );
-    this.registerInfix(token.INT, (left: Expression) =>
+    this.registerInfix(token.MINUS, (left: TExpression) =>
       this.parseInfixExpression(left)
     );
-    this.registerInfix(token.BANG, (left: Expression) =>
+    this.registerInfix(token.SLASH, (left: TExpression) =>
       this.parseInfixExpression(left)
     );
-    this.registerInfix(token.MINUS, (left: Expression) =>
+    this.registerInfix(token.ASTERISK, (left: TExpression) =>
       this.parseInfixExpression(left)
     );
-    this.registerInfix(token.TRUE, (left: Expression) =>
+    this.registerInfix(token.EQ, (left: TExpression) =>
       this.parseInfixExpression(left)
     );
-    this.registerInfix(token.FALSE, (left: Expression) =>
+    this.registerInfix(token.NOT_EQ, (left: TExpression) =>
       this.parseInfixExpression(left)
     );
-    this.registerInfix(token.LPAREN, (left: Expression) =>
+    this.registerInfix(token.LT, (left: TExpression) =>
       this.parseInfixExpression(left)
     );
-    this.registerInfix(token.IF, (left: Expression) =>
-      this.parseInfixExpression(left)
-    );
-    this.registerInfix(token.FUNCTION, (left: Expression) =>
+    this.registerInfix(token.GT, (left: TExpression) =>
       this.parseInfixExpression(left)
     );
   }
 
+  /**
+   * parser classをinstance化する
+   * @param lexer レキサー
+   */
   static of(lexer: Lexer): Parser {
-    return new Parser(lexer);
+    const currentToken = lexer.nextToken();
+    const nextToken = lexer.nextToken();
+    console.log("<of> currentToken", currentToken);
+    const parser = new Parser(lexer, currentToken, nextToken);
+    return parser;
   }
 
   get errors(): string[] {
@@ -92,18 +111,25 @@ export default class Parser {
     this._errors = arr;
   }
 
+  /**
+   * 現在位置にあるtokenと一致するか調べる
+   * @param t token
+   */
   curTokenIs(t: TokenType): boolean {
     return this.curToken ? this.curToken.type == t : false;
   }
 
-  parseStatement(): Statement | undefined {
-    console.log("this.curToken", this.curToken);
+  /**
+   * 文をparseする
+   */
+  parseStatement(): TStatement {
     switch (this.curToken?.type) {
       case token.LET:
         return this.parseLetStatement();
       case token.RETURN:
         return this.parseReturnStatement();
       default:
+        // 式文としてparseする
         return this.parseExpressionStatement();
     }
   }
@@ -138,9 +164,12 @@ export default class Parser {
   }
 
   parsePrefixExpression(): Expression {
+    if (!this.curToken) {
+      throw new Error("un initialized token position");
+    }
     const expression = PrefixExpression.of(
       this.curToken,
-      this.curToken?.literal
+      this.curToken.literal
     );
 
     this.nextToken();
@@ -151,6 +180,9 @@ export default class Parser {
   }
 
   parseBoolean(): Expression {
+    if (!this.curToken) {
+      throw new Error("un initialized token position");
+    }
     return Boolean.of(this.curToken, this.curTokenIs(token.TRUE));
   }
 
@@ -204,23 +236,39 @@ export default class Parser {
     return block;
   }
 
+  /**
+   * 関数リテラルのparse. fn<params><block statments>をparseする。
+   * P103
+   */
   parseFunctionLiteral(): Expression | undefined {
     const lit = FunctionLiteral.of(this.curToken);
+
     if (!this.expectPeek(token.LPAREN)) {
-      return undefined;
+      // 現在位置の次が(で始まってるか確認
+      throw new Error("not started with (");
     }
+
+    // 関数の引数をparse(現在位置が進む)
     lit.parameters = this.parseFunctionParameters();
+
     if (!this.expectPeek(token.LBRACE)) {
-      return undefined;
+      // 現在位置の次が{で始まってるか確認
+      throw new Error("not started with {");
     }
+
+    // 関数のブロック節をparse(現在位置が進む)
     lit.body = this.parseBlockStatement();
     return lit;
   }
 
-  parseFunctionParameters(): Identifier[] | undefined {
+  /**
+   * 関数の引数をparseする
+   */
+  parseFunctionParameters(): Identifier[] {
     let identifiers: Identifier[] = [];
 
     if (this.peekTokenIs(token.RPAREN)) {
+      // 次が)なら引数が空なので位置を一つ進めて止める
       this.nextToken();
       return identifiers;
     }
@@ -230,32 +278,36 @@ export default class Parser {
     const ident = Identifier.of(this.curToken, this.curToken?.literal);
     identifiers = [...identifiers, ident];
 
+    // commmaに出会わなくなるまで引数を読み進めて保存していく
     while (this.peekTokenIs(token.COMMA)) {
+      this.nextToken(); // ,分のskip
       this.nextToken();
-      this.nextToken();
-      const ident = Identifier.of(this.curToken, this.curToken?.literal);
+      const ident = Identifier.of(this.curToken, this.curToken.literal);
       identifiers = [...identifiers, ident];
     }
 
     if (!this.expectPeek(token.RPAREN)) {
-      return undefined;
+      // ,にぶつからないところまで読んだのに)で終わっていないので構文エラー
+      throw new Error("not ended with )");
     }
 
     return identifiers;
   }
 
-  parseLetStatement(): LetStatement | undefined {
-    if (!this.curToken) throw new Error("undefined"); // FIXME: 本当に例外なげていい？
+  /**
+   * letを表現するASTに情報を詰めて返す
+   */
+  parseLetStatement(): LetStatement {
     const stmt = LetStatement.of(this.curToken);
 
     if (!this.expectPeek(token.IDENT)) {
-      return undefined;
+      throw new Error("unexpected next token");
     }
 
     stmt.name = Identifier.of(this.curToken, this.curToken.literal);
 
     if (!this.expectPeek(token.ASSIGN)) {
-      return undefined;
+      throw new Error("unexpected next token");
     }
 
     this.nextToken();
@@ -297,21 +349,25 @@ export default class Parser {
     return stmt;
   }
 
+  /**
+   * ソースコードをparseする関数
+   */
   parseProgram(): Program {
     const program = Program.of([]);
     program.statements = [];
     while (!this.curTokenIs(token.EOF)) {
       const stmt = this.parseStatement();
-      console.log("stmt", stmt);
       if (stmt != undefined) {
         program.statements = [...program.statements, stmt];
-        console.log("program.statements", program.statements);
       }
       this.nextToken();
     }
     return program;
   }
 
+  /**
+   * tokenを一つ読み進める
+   */
   nextToken(): void {
     this.curToken = this.peekToken;
     this.peekToken = this.lexer.nextToken();
@@ -328,56 +384,72 @@ export default class Parser {
     return Identifier.of(this.curToken, this.curToken?.literal);
   }
 
-  noPrefixParseFnError(t?: TokenType): void {
+  noPrefixParseFnError(t: TokenType): void {
     const msg = `no prefix parse function for ${t}found`;
     console.log(msg);
     this.errors = [...this.errors, msg];
   }
 
   peekTokenIs(t: TokenType): boolean {
-    return this.peekToken?.type === t;
+    return this.peekToken.type === t;
   }
 
+  /**
+   * 次のtokenの優先度を調べる
+   */
   peekPrecedence(): number {
     return (
-      precedences[this.peekToken?.type as PrecedencesKeyType] ||
+      precedenceTable[this.peekToken.type as PrecedenceTableKeyType] ||
       precedences.LOWEST
     );
   }
 
-  parseExpression(precedence: number): Expression | undefined {
-    const prefix = this.curToken
-      ? this.prefixParseFns[this.curToken.type]
-      : undefined;
+  /**
+   * 式を順番にparseしていく
+   * p73
+   * @param precedence
+   */
+  parseExpression(precedence: number): TExpression {
+    console.error("this.curToken", this.curToken);
+    const prefix = this.prefixParseFns[this.curToken.type];
     if (prefix == undefined) {
-      this.noPrefixParseFnError(this.curToken?.type);
-      return undefined;
+      console.error("prefix", prefix);
+      throw new Error("unexpected token");
     }
-    console.log("prefix", prefix);
-    let leftExp = prefix();
 
+    // この時点でのprefixは前置演算子に対応する関数
+    let leftExp = prefix();
+    console.log("precedence", precedence);
+    console.log("this.peekPrecedence()", this.peekPrecedence());
     while (
       !this.peekTokenIs(token.SEMICOLON) &&
       precedence < this.peekPrecedence()
     ) {
-      if (!this.peekToken) throw new Error();
       const infix = this.infixParseFns[this.peekToken.type];
       if (infix == undefined) {
+        // 前置演算子であれば現在のparse結果を返す
         return leftExp;
       }
 
+      // 中値演算子であることがわかればtokenを進める
       this.nextToken();
-
+      console.log("INFIX");
       leftExp = infix(leftExp);
     }
+
+    console.info("leftExp", leftExp);
 
     return leftExp;
   }
 
-  parseInfixExpression(left: Expression): Expression {
+  /**
+   * 中値演算子をparseする
+   * @param left
+   */
+  parseInfixExpression(left: TExpression): TExpression {
     const expression = InfixExpression.of(
       this.curToken,
-      this.curToken?.literal,
+      this.curToken.literal,
       left
     );
 
@@ -385,7 +457,7 @@ export default class Parser {
     this.nextToken();
     const parsedExpression = this.parseExpression(precedence);
     if (parsedExpression) {
-      expression.setRight(parsedExpression);
+      expression.right = parsedExpression;
     }
     return expression;
   }
@@ -397,7 +469,7 @@ export default class Parser {
 
   registerInfix(
     tokenType: TokenType,
-    fn: (ex: Expression) => Expression
+    fn: (ex: TExpression) => TExpression
   ): void {
     this.infixParseFns[tokenType] = fn;
   }

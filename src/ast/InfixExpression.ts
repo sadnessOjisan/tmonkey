@@ -7,14 +7,15 @@ export default class InfixExpression implements Expression {
     private token: Token,
     private _operator: string,
     private _left: TExpression,
-    private _right: TExpression
+    /** seterで入れられるからundefined. (tokenを副作用で進めていくから生焼けオブジェクトになりやすい) */
+    private _right?: TExpression
   ) {}
 
   static of(
     token: Token,
     operator: string,
     left: TExpression,
-    right: TExpression
+    right?: TExpression
   ): InfixExpression {
     return new InfixExpression(token, operator, left, right);
   }
@@ -42,6 +43,9 @@ export default class InfixExpression implements Expression {
   }
 
   get right(): TExpression {
+    if (!this._right) {
+      throw new Error("unsetted right");
+    }
     return this._right;
   }
 

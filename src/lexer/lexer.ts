@@ -8,7 +8,9 @@ export class Lexer {
     private position: number = 0,
     private readPosition: number = 0,
     private ch: string = ""
-  ) {}
+  ) {
+    this.readChar();
+  }
 
   static of(
     input: string,
@@ -19,6 +21,9 @@ export class Lexer {
     return new Lexer(input, position, readPosition, ch);
   }
 
+  /**
+   * 現在のtokenを軸解析した結果を返し、token位置を1つ進める
+   */
   nextToken(): Token {
     let tok: Token;
     this.skipWhitespace();

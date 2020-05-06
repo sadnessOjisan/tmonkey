@@ -1,11 +1,12 @@
 import * as fs from "fs";
 import { Lexer } from "../lexer/lexer";
 import Parser from "../parser/parser";
+import Environment from "../object/environment";
 
 const PROMPT = ">> ";
 
 export const start = (): void => {
-  const env = NewEnvironment();
+  const env = Environment.of({});
   const stdIn = fs.readFileSync("/dev/stdin", "utf8");
   console.log("stdIn", stdIn);
   for (;;) {
@@ -23,10 +24,5 @@ export const start = (): void => {
       continue;
     }
     console.log(program);
-
-    const evaluated = evaluator.eval(program, env);
-    if (evaluated != undefined) {
-      console.log(evaluated.inspect());
-    }
   }
 };

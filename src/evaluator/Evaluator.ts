@@ -212,8 +212,7 @@ const evalIdentifier = (node: Identifier, env: Environment): Obj => {
   if (!val) {
     return newError("identifier not found: " + node.value);
   }
-
-  return val;
+  return val.obj;
 };
 
 const isTruthy = (obj: Obj): boolean => {
@@ -304,7 +303,7 @@ const unwrapReturnValue = (obj: any): Obj => {
  * @param node
  * @param env
  */
-const evaluate = (node: TNode, env: Environment): Obj => {
+export const evaluate = (node: TNode, env: Environment): any => {
   if (node instanceof Program) {
     return evalProgram(node, env); // ブロックの塊やネストされたブロックを評価する
   } else if (node instanceof BlockStatement) {

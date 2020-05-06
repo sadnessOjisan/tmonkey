@@ -1,11 +1,17 @@
 import { Token } from "../token/token ";
 import { Statement, TStatement } from "./Node";
 
+/**
+ * Block節を表現するAST
+ */
 export default class BlockStatement implements Statement {
   public readonly nodeType = BlockStatement;
 
   private constructor(
     private token?: Token, // { が当てはまるはず
+    /**
+     * blockに含まれる文の一覧
+     */
     private _statements?: TStatement[]
   ) {}
 

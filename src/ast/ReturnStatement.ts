@@ -12,7 +12,7 @@ export default class ReturnStatement implements Statement {
     return this._returnValue;
   }
 
-  set returnValue(returnValue: Expression | undefined) {
+  set returnValue(returnValue: Expression) {
     this._returnValue = returnValue;
   }
 
