@@ -2,6 +2,9 @@ import { Token } from "../token/token ";
 import { Expression } from "./Node";
 import BlockStatement from "./BlockStatement";
 
+/**
+ * if文のAST NODE
+ */
 export default class IfExpression implements Expression {
   public readonly nodeType = IfExpression;
   constructor(

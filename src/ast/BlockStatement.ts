@@ -5,7 +5,7 @@ export default class BlockStatement implements Statement {
   public readonly nodeType = BlockStatement;
 
   private constructor(
-    private token?: Token,
+    private token?: Token, // { が当てはまるはず
     private _statements?: Statement[]
   ) {}
 

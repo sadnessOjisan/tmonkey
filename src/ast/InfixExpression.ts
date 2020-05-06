@@ -1,20 +1,20 @@
 import { Token } from "../token/token ";
-import { Expression } from "./Node";
+import { Expression, TExpression } from "./Node";
 
 export default class InfixExpression implements Expression {
   public readonly nodeType = InfixExpression;
   private constructor(
-    private token?: Token,
-    private operator?: string,
-    private left?: Expression,
-    private right?: Expression
+    private token: Token,
+    private _operator: string,
+    private _left: TExpression,
+    private _right: TExpression
   ) {}
 
   static of(
-    token?: Token,
-    operator?: string,
-    left?: Expression,
-    right?: Expression
+    token: Token,
+    operator: string,
+    left: TExpression,
+    right: TExpression
   ): InfixExpression {
     return new InfixExpression(token, operator, left, right);
   }
@@ -28,12 +28,24 @@ export default class InfixExpression implements Expression {
   }
 
   toString(): string {
-    return `(${this.left?.toString()}" "${
-      this.operator
+    return `(${this._left.toString()}" "${
+      this._operator
     }" "${this.right?.toString()})`;
   }
 
-  setRight(expression: Expression): void {
-    this.right = expression;
+  get operator(): string {
+    return this._operator;
+  }
+
+  get left(): TExpression {
+    return this._left;
+  }
+
+  get right(): TExpression {
+    return this._right;
+  }
+
+  set right(expression: TExpression) {
+    this._right = expression;
   }
 }
