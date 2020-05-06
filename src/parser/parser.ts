@@ -126,7 +126,6 @@ export default class Parser {
    * 文をparseする
    */
   parseStatement(): TStatement {
-    console.info("this.curToken.type", this.curToken.type);
     switch (this.curToken.type) {
       case token.LET:
         return this.parseLetStatement();
@@ -223,6 +222,9 @@ export default class Parser {
     return expression;
   }
 
+  /**
+   * block 節のparse
+   */
   parseBlockStatement() {
     const block = BlockStatement.of(this.curToken);
     block.statements = [];
@@ -326,8 +328,6 @@ export default class Parser {
   }
 
   parseReturnStatement(): ReturnStatement {
-    if (!this.curToken) throw new Error("undefined"); // FIXME: 本当に例外なげていい？
-
     const stmt = new ReturnStatement(this.curToken);
 
     this.nextToken();

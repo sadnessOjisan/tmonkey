@@ -1,5 +1,5 @@
 import { Token } from "../token/token ";
-import { Expression } from "./Node";
+import { Expression, TExpression } from "./Node";
 import BlockStatement from "./BlockStatement";
 
 /**
@@ -9,7 +9,7 @@ export default class IfExpression implements Expression {
   public readonly nodeType = IfExpression;
   constructor(
     private token: Token,
-    private _condition?: Expression,
+    private _condition?: TExpression,
     private _consequence?: BlockStatement,
     private _alternative?: BlockStatement
   ) {}
@@ -29,14 +29,14 @@ export default class IfExpression implements Expression {
     this._alternative = alternative;
   }
 
-  get condition(): Expression {
+  get condition(): TExpression {
     if (!this._condition) {
       throw new Error("no setted");
     }
     return this._condition;
   }
 
-  set condition(condition: Expression) {
+  set condition(condition: TExpression) {
     this._condition = condition;
   }
 
