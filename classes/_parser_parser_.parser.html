@@ -1,0 +1,1092 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Parser | tmonkey</title>
+	<meta name="description" content="Documentation for tmonkey">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="../assets/css/main.css">
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="../assets/js/search.json" data-base="..">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="../index.html" class="title">tmonkey</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-externals" checked />
+							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
+							<input type="checkbox" id="tsd-filter-only-exported" />
+							<label class="tsd-widget" for="tsd-filter-only-exported">Only exported</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<ul class="tsd-breadcrumb">
+				<li>
+					<a href="../globals.html">Globals</a>
+				</li>
+				<li>
+					<a href="../modules/_parser_parser_.html">&quot;parser/parser&quot;</a>
+				</li>
+				<li>
+					<a href="_parser_parser_.parser.html">Parser</a>
+				</li>
+			</ul>
+			<h1>Class Parser</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-hierarchy">
+				<h3>Hierarchy</h3>
+				<ul class="tsd-hierarchy">
+					<li>
+						<span class="target">Parser</span>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel-group tsd-index-group">
+				<h2>Index</h2>
+				<section class="tsd-panel tsd-index-panel">
+					<div class="tsd-index-content">
+						<section class="tsd-index-section ">
+							<h3>Constructors</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="_parser_parser_.parser.html#constructor" class="tsd-kind-icon">constructor</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section tsd-is-private tsd-is-private-protected">
+							<h3>Properties</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_parser_parser_.parser.html#_errors" class="tsd-kind-icon">_errors</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_parser_parser_.parser.html#curtoken" class="tsd-kind-icon">cur<wbr>Token</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_parser_parser_.parser.html#infixparsefns" class="tsd-kind-icon">infix<wbr>Parse<wbr>Fns</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_parser_parser_.parser.html#lexer" class="tsd-kind-icon">lexer</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_parser_parser_.parser.html#peektoken" class="tsd-kind-icon">peek<wbr>Token</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_parser_parser_.parser.html#prefixparsefns" class="tsd-kind-icon">prefix<wbr>Parse<wbr>Fns</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
+							<h3>Accessors</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-accessor tsd-parent-kind-class"><a href="_parser_parser_.parser.html#errors" class="tsd-kind-icon">errors</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
+							<h3>Methods</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_parser_parser_.parser.html#curprecedence" class="tsd-kind-icon">cur<wbr>Precedence</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_parser_parser_.parser.html#curtokenis" class="tsd-kind-icon">cur<wbr>Token<wbr>Is</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_parser_parser_.parser.html#expectpeek" class="tsd-kind-icon">expect<wbr>Peek</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_parser_parser_.parser.html#nexttoken" class="tsd-kind-icon">next<wbr>Token</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_parser_parser_.parser.html#noprefixparsefnerror" class="tsd-kind-icon">no<wbr>Prefix<wbr>Parse<wbr>FnError</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_parser_parser_.parser.html#parseblockstatement" class="tsd-kind-icon">parse<wbr>Block<wbr>Statement</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_parser_parser_.parser.html#parseboolean" class="tsd-kind-icon">parse<wbr>Boolean</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_parser_parser_.parser.html#parseexpression" class="tsd-kind-icon">parse<wbr>Expression</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_parser_parser_.parser.html#parseexpressionstatement" class="tsd-kind-icon">parse<wbr>Expression<wbr>Statement</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_parser_parser_.parser.html#parsefunctionliteral" class="tsd-kind-icon">parse<wbr>Function<wbr>Literal</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_parser_parser_.parser.html#parsefunctionparameters" class="tsd-kind-icon">parse<wbr>Function<wbr>Parameters</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_parser_parser_.parser.html#parsegroupedexpression" class="tsd-kind-icon">parse<wbr>Grouped<wbr>Expression</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_parser_parser_.parser.html#parseidentifier" class="tsd-kind-icon">parse<wbr>Identifier</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_parser_parser_.parser.html#parseifexpression" class="tsd-kind-icon">parse<wbr>IfExpression</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_parser_parser_.parser.html#parseinfixexpression" class="tsd-kind-icon">parse<wbr>Infix<wbr>Expression</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_parser_parser_.parser.html#parseintegerliteral" class="tsd-kind-icon">parse<wbr>Integer<wbr>Literal</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_parser_parser_.parser.html#parseletstatement" class="tsd-kind-icon">parse<wbr>Let<wbr>Statement</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_parser_parser_.parser.html#parseprefixexpression" class="tsd-kind-icon">parse<wbr>Prefix<wbr>Expression</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_parser_parser_.parser.html#parseprogram" class="tsd-kind-icon">parse<wbr>Program</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_parser_parser_.parser.html#parsereturnstatement" class="tsd-kind-icon">parse<wbr>Return<wbr>Statement</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_parser_parser_.parser.html#parsestatement" class="tsd-kind-icon">parse<wbr>Statement</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_parser_parser_.parser.html#peekerror" class="tsd-kind-icon">peek<wbr>Error</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_parser_parser_.parser.html#peekprecedence" class="tsd-kind-icon">peek<wbr>Precedence</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_parser_parser_.parser.html#peektokenis" class="tsd-kind-icon">peek<wbr>Token<wbr>Is</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_parser_parser_.parser.html#registerinfix" class="tsd-kind-icon">register<wbr>Infix</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_parser_parser_.parser.html#registerprefix" class="tsd-kind-icon">register<wbr>Prefix</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="_parser_parser_.parser.html#of" class="tsd-kind-icon">of</a></li>
+							</ul>
+						</section>
+					</div>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Constructors</h2>
+				<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class">
+					<a name="constructor" class="tsd-anchor"></a>
+					<h3>constructor</h3>
+					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Parser<span class="tsd-signature-symbol">(</span>lexer<span class="tsd-signature-symbol">: </span><a href="_lexer_lexer_.lexer.html" class="tsd-signature-type">Lexer</a>, curToken<span class="tsd-signature-symbol">: </span><a href="../interfaces/_token_token__.token.html" class="tsd-signature-type">Token</a>, peekToken<span class="tsd-signature-symbol">: </span><a href="../interfaces/_token_token__.token.html" class="tsd-signature-type">Token</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_parser_parser_.parser.html" class="tsd-signature-type">Parser</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/sadnessOjisan/tmonkey/blob/f6ff879/src/parser/parser.ts#L50">parser/parser.ts:50</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>lexer: <a href="_lexer_lexer_.lexer.html" class="tsd-signature-type">Lexer</a></h5>
+								</li>
+								<li>
+									<h5>curToken: <a href="../interfaces/_token_token__.token.html" class="tsd-signature-type">Token</a></h5>
+								</li>
+								<li>
+									<h5>peekToken: <a href="../interfaces/_token_token__.token.html" class="tsd-signature-type">Token</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="_parser_parser_.parser.html" class="tsd-signature-type">Parser</a></h4>
+						</li>
+					</ul>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group tsd-is-private tsd-is-private-protected">
+				<h2>Properties</h2>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="_errors" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> _errors</h3>
+					<div class="tsd-signature tsd-kind-icon">_errors<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/sadnessOjisan/tmonkey/blob/f6ff879/src/parser/parser.ts#L34">parser/parser.ts:34</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="curtoken" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> cur<wbr>Token</h3>
+					<div class="tsd-signature tsd-kind-icon">cur<wbr>Token<span class="tsd-signature-symbol">:</span> <a href="../interfaces/_token_token__.token.html" class="tsd-signature-type">Token</a></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/sadnessOjisan/tmonkey/blob/f6ff879/src/parser/parser.ts#L38">parser/parser.ts:38</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>現在位置のtoken</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="infixparsefns" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> infix<wbr>Parse<wbr>Fns</h3>
+					<div class="tsd-signature tsd-kind-icon">infix<wbr>Parse<wbr>Fns<span class="tsd-signature-symbol">:</span> <a href="../modules/_parser_parser_.html#infixparsefnstype" class="tsd-signature-type">InfixParseFnsType</a></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/sadnessOjisan/tmonkey/blob/f6ff879/src/parser/parser.ts#L50">parser/parser.ts:50</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>infixとそれに対応するparse関数を保存するテーブル</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="lexer" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> lexer</h3>
+					<div class="tsd-signature tsd-kind-icon">lexer<span class="tsd-signature-symbol">:</span> <a href="_lexer_lexer_.lexer.html" class="tsd-signature-type">Lexer</a></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/sadnessOjisan/tmonkey/blob/f6ff879/src/parser/parser.ts#L51">parser/parser.ts:51</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="peektoken" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> peek<wbr>Token</h3>
+					<div class="tsd-signature tsd-kind-icon">peek<wbr>Token<span class="tsd-signature-symbol">:</span> <a href="../interfaces/_token_token__.token.html" class="tsd-signature-type">Token</a></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/sadnessOjisan/tmonkey/blob/f6ff879/src/parser/parser.ts#L42">parser/parser.ts:42</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>次の位置のtoken. curtokenだけだと行末にあるものかどうかを識別できないので導入した</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="prefixparsefns" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> prefix<wbr>Parse<wbr>Fns</h3>
+					<div class="tsd-signature tsd-kind-icon">prefix<wbr>Parse<wbr>Fns<span class="tsd-signature-symbol">:</span> <a href="../modules/_parser_parser_.html#prefixparsefnstype" class="tsd-signature-type">PrefixParseFnsType</a></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/sadnessOjisan/tmonkey/blob/f6ff879/src/parser/parser.ts#L46">parser/parser.ts:46</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>prefixとそれに対応するparse関数を保存するテーブル</p>
+						</div>
+					</div>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Accessors</h2>
+				<section class="tsd-panel tsd-member tsd-kind-accessor tsd-parent-kind-class">
+					<a name="errors" class="tsd-anchor"></a>
+					<h3>errors</h3>
+					<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> errors<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></li>
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> errors<span class="tsd-signature-symbol">(</span>arr<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/sadnessOjisan/tmonkey/blob/f6ff879/src/parser/parser.ts#L106">parser/parser.ts:106</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></h4>
+						</li>
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/sadnessOjisan/tmonkey/blob/f6ff879/src/parser/parser.ts#L110">parser/parser.ts:110</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>arr: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Methods</h2>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="curprecedence" class="tsd-anchor"></a>
+					<h3>cur<wbr>Precedence</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">cur<wbr>Precedence<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/sadnessOjisan/tmonkey/blob/f6ff879/src/parser/parser.ts#L376">parser/parser.ts:376</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="curtokenis" class="tsd-anchor"></a>
+					<h3>cur<wbr>Token<wbr>Is</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">cur<wbr>Token<wbr>Is<span class="tsd-signature-symbol">(</span>t<span class="tsd-signature-symbol">: </span><a href="../modules/_token_token__.html#tokentype" class="tsd-signature-type">TokenType</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/sadnessOjisan/tmonkey/blob/f6ff879/src/parser/parser.ts#L118">parser/parser.ts:118</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>現在位置にあるtokenと一致するか調べる</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>t: <a href="../modules/_token_token__.html#tokentype" class="tsd-signature-type">TokenType</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>token</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="expectpeek" class="tsd-anchor"></a>
+					<h3>expect<wbr>Peek</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">expect<wbr>Peek<span class="tsd-signature-symbol">(</span>t<span class="tsd-signature-symbol">: </span><a href="../modules/_token_token__.html#tokentype" class="tsd-signature-type">TokenType</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/sadnessOjisan/tmonkey/blob/f6ff879/src/parser/parser.ts#L137">parser/parser.ts:137</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>t: <a href="../modules/_token_token__.html#tokentype" class="tsd-signature-type">TokenType</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="nexttoken" class="tsd-anchor"></a>
+					<h3>next<wbr>Token</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">next<wbr>Token<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/sadnessOjisan/tmonkey/blob/f6ff879/src/parser/parser.ts#L371">parser/parser.ts:371</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>tokenを一つ読み進める</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="noprefixparsefnerror" class="tsd-anchor"></a>
+					<h3>no<wbr>Prefix<wbr>Parse<wbr>FnError</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">no<wbr>Prefix<wbr>Parse<wbr>FnError<span class="tsd-signature-symbol">(</span>t<span class="tsd-signature-symbol">: </span><a href="../modules/_token_token__.html#tokentype" class="tsd-signature-type">TokenType</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/sadnessOjisan/tmonkey/blob/f6ff879/src/parser/parser.ts#L387">parser/parser.ts:387</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>t: <a href="../modules/_token_token__.html#tokentype" class="tsd-signature-type">TokenType</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="parseblockstatement" class="tsd-anchor"></a>
+					<h3>parse<wbr>Block<wbr>Statement</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">parse<wbr>Block<wbr>Statement<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_ast_blockstatement_.blockstatement.html" class="tsd-signature-type">BlockStatement</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/sadnessOjisan/tmonkey/blob/f6ff879/src/parser/parser.ts#L222">parser/parser.ts:222</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <a href="_ast_blockstatement_.blockstatement.html" class="tsd-signature-type">BlockStatement</a></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="parseboolean" class="tsd-anchor"></a>
+					<h3>parse<wbr>Boolean</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">parse<wbr>Boolean<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/_ast_node_.expression.html" class="tsd-signature-type">Expression</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/sadnessOjisan/tmonkey/blob/f6ff879/src/parser/parser.ts#L182">parser/parser.ts:182</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <a href="../interfaces/_ast_node_.expression.html" class="tsd-signature-type">Expression</a></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="parseexpression" class="tsd-anchor"></a>
+					<h3>parse<wbr>Expression</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">parse<wbr>Expression<span class="tsd-signature-symbol">(</span>precedence<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../modules/_ast_node_.html#texpression" class="tsd-signature-type">TExpression</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/sadnessOjisan/tmonkey/blob/f6ff879/src/parser/parser.ts#L412">parser/parser.ts:412</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>式を順番にparseしていく
+									p73</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>precedence: <span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography">
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="../modules/_ast_node_.html#texpression" class="tsd-signature-type">TExpression</a></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="parseexpressionstatement" class="tsd-anchor"></a>
+					<h3>parse<wbr>Expression<wbr>Statement</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">parse<wbr>Expression<wbr>Statement<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_ast_expressionstatement_.expressionstatement.html" class="tsd-signature-type">ExpressionStatement</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/sadnessOjisan/tmonkey/blob/f6ff879/src/parser/parser.ts#L340">parser/parser.ts:340</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <a href="_ast_expressionstatement_.expressionstatement.html" class="tsd-signature-type">ExpressionStatement</a></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="parsefunctionliteral" class="tsd-anchor"></a>
+					<h3>parse<wbr>Function<wbr>Literal</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">parse<wbr>Function<wbr>Literal<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/_ast_node_.expression.html" class="tsd-signature-type">Expression</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/sadnessOjisan/tmonkey/blob/f6ff879/src/parser/parser.ts#L243">parser/parser.ts:243</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>関数リテラルのparse. fn<params><block statments>をparseする。
+									P103</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <a href="../interfaces/_ast_node_.expression.html" class="tsd-signature-type">Expression</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="parsefunctionparameters" class="tsd-anchor"></a>
+					<h3>parse<wbr>Function<wbr>Parameters</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">parse<wbr>Function<wbr>Parameters<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_ast_identifier_.identifier.html" class="tsd-signature-type">Identifier</a><span class="tsd-signature-symbol">[]</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/sadnessOjisan/tmonkey/blob/f6ff879/src/parser/parser.ts#L267">parser/parser.ts:267</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>関数の引数をparseする</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <a href="_ast_identifier_.identifier.html" class="tsd-signature-type">Identifier</a><span class="tsd-signature-symbol">[]</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="parsegroupedexpression" class="tsd-anchor"></a>
+					<h3>parse<wbr>Grouped<wbr>Expression</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">parse<wbr>Grouped<wbr>Expression<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/_ast_node_.expression.html" class="tsd-signature-type">Expression</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/sadnessOjisan/tmonkey/blob/f6ff879/src/parser/parser.ts#L189">parser/parser.ts:189</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <a href="../interfaces/_ast_node_.expression.html" class="tsd-signature-type">Expression</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="parseidentifier" class="tsd-anchor"></a>
+					<h3>parse<wbr>Identifier</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">parse<wbr>Identifier<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/_ast_node_.expression.html" class="tsd-signature-type">Expression</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/sadnessOjisan/tmonkey/blob/f6ff879/src/parser/parser.ts#L383">parser/parser.ts:383</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <a href="../interfaces/_ast_node_.expression.html" class="tsd-signature-type">Expression</a></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="parseifexpression" class="tsd-anchor"></a>
+					<h3>parse<wbr>IfExpression</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">parse<wbr>IfExpression<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/_ast_node_.expression.html" class="tsd-signature-type">Expression</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/sadnessOjisan/tmonkey/blob/f6ff879/src/parser/parser.ts#L198">parser/parser.ts:198</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <a href="../interfaces/_ast_node_.expression.html" class="tsd-signature-type">Expression</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="parseinfixexpression" class="tsd-anchor"></a>
+					<h3>parse<wbr>Infix<wbr>Expression</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">parse<wbr>Infix<wbr>Expression<span class="tsd-signature-symbol">(</span>left<span class="tsd-signature-symbol">: </span><a href="../modules/_ast_node_.html#texpression" class="tsd-signature-type">TExpression</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../modules/_ast_node_.html#texpression" class="tsd-signature-type">TExpression</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/sadnessOjisan/tmonkey/blob/f6ff879/src/parser/parser.ts#L449">parser/parser.ts:449</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>中値演算子をparseする</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>left: <a href="../modules/_ast_node_.html#texpression" class="tsd-signature-type">TExpression</a></h5>
+									<div class="tsd-comment tsd-typography">
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="../modules/_ast_node_.html#texpression" class="tsd-signature-type">TExpression</a></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="parseintegerliteral" class="tsd-anchor"></a>
+					<h3>parse<wbr>Integer<wbr>Literal</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">parse<wbr>Integer<wbr>Literal<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/_ast_node_.expression.html" class="tsd-signature-type">Expression</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/sadnessOjisan/tmonkey/blob/f6ff879/src/parser/parser.ts#L152">parser/parser.ts:152</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <a href="../interfaces/_ast_node_.expression.html" class="tsd-signature-type">Expression</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="parseletstatement" class="tsd-anchor"></a>
+					<h3>parse<wbr>Let<wbr>Statement</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">parse<wbr>Let<wbr>Statement<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_ast_letstatement_.letstatement.html" class="tsd-signature-type">LetStatement</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/sadnessOjisan/tmonkey/blob/f6ff879/src/parser/parser.ts#L300">parser/parser.ts:300</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>letを表現するASTに情報を詰めて返す</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <a href="_ast_letstatement_.letstatement.html" class="tsd-signature-type">LetStatement</a></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="parseprefixexpression" class="tsd-anchor"></a>
+					<h3>parse<wbr>Prefix<wbr>Expression</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">parse<wbr>Prefix<wbr>Expression<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/_ast_node_.expression.html" class="tsd-signature-type">Expression</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/sadnessOjisan/tmonkey/blob/f6ff879/src/parser/parser.ts#L166">parser/parser.ts:166</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <a href="../interfaces/_ast_node_.expression.html" class="tsd-signature-type">Expression</a></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="parseprogram" class="tsd-anchor"></a>
+					<h3>parse<wbr>Program</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">parse<wbr>Program<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_ast_program_.program.html" class="tsd-signature-type">Program</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/sadnessOjisan/tmonkey/blob/f6ff879/src/parser/parser.ts#L355">parser/parser.ts:355</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>ソースコードをparseする関数</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <a href="_ast_program_.program.html" class="tsd-signature-type">Program</a></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="parsereturnstatement" class="tsd-anchor"></a>
+					<h3>parse<wbr>Return<wbr>Statement</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">parse<wbr>Return<wbr>Statement<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_ast_returnstatement_.returnstatement.html" class="tsd-signature-type">ReturnStatement</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/sadnessOjisan/tmonkey/blob/f6ff879/src/parser/parser.ts#L324">parser/parser.ts:324</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <a href="_ast_returnstatement_.returnstatement.html" class="tsd-signature-type">ReturnStatement</a></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="parsestatement" class="tsd-anchor"></a>
+					<h3>parse<wbr>Statement</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">parse<wbr>Statement<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../modules/_ast_node_.html#tstatement" class="tsd-signature-type">TStatement</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/sadnessOjisan/tmonkey/blob/f6ff879/src/parser/parser.ts#L125">parser/parser.ts:125</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>文をparseする</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <a href="../modules/_ast_node_.html#tstatement" class="tsd-signature-type">TStatement</a></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="peekerror" class="tsd-anchor"></a>
+					<h3>peek<wbr>Error</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">peek<wbr>Error<span class="tsd-signature-symbol">(</span>t<span class="tsd-signature-symbol">: </span><a href="../modules/_token_token__.html#tokentype" class="tsd-signature-type">TokenType</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/sadnessOjisan/tmonkey/blob/f6ff879/src/parser/parser.ts#L147">parser/parser.ts:147</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>t: <a href="../modules/_token_token__.html#tokentype" class="tsd-signature-type">TokenType</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="peekprecedence" class="tsd-anchor"></a>
+					<h3>peek<wbr>Precedence</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">peek<wbr>Precedence<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/sadnessOjisan/tmonkey/blob/f6ff879/src/parser/parser.ts#L400">parser/parser.ts:400</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>次のtokenの優先度を調べる</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="peektokenis" class="tsd-anchor"></a>
+					<h3>peek<wbr>Token<wbr>Is</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">peek<wbr>Token<wbr>Is<span class="tsd-signature-symbol">(</span>t<span class="tsd-signature-symbol">: </span><a href="../modules/_token_token__.html#tokentype" class="tsd-signature-type">TokenType</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/sadnessOjisan/tmonkey/blob/f6ff879/src/parser/parser.ts#L393">parser/parser.ts:393</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>t: <a href="../modules/_token_token__.html#tokentype" class="tsd-signature-type">TokenType</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="registerinfix" class="tsd-anchor"></a>
+					<h3>register<wbr>Infix</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">register<wbr>Infix<span class="tsd-signature-symbol">(</span>tokenType<span class="tsd-signature-symbol">: </span><a href="../modules/_token_token__.html#tokentype" class="tsd-signature-type">TokenType</a>, fn<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>ex<span class="tsd-signature-symbol">: </span><a href="../modules/_ast_node_.html#texpression" class="tsd-signature-type">TExpression</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><a href="../modules/_ast_node_.html#texpression" class="tsd-signature-type">TExpression</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/sadnessOjisan/tmonkey/blob/f6ff879/src/parser/parser.ts#L470">parser/parser.ts:470</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>tokenType: <a href="../modules/_token_token__.html#tokentype" class="tsd-signature-type">TokenType</a></h5>
+								</li>
+								<li>
+									<h5>fn: <span class="tsd-signature-symbol">(</span>ex<span class="tsd-signature-symbol">: </span><a href="../modules/_ast_node_.html#texpression" class="tsd-signature-type">TExpression</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><a href="../modules/_ast_node_.html#texpression" class="tsd-signature-type">TExpression</a></h5>
+									<ul class="tsd-parameters">
+										<li class="tsd-parameter-signature">
+											<ul class="tsd-signatures tsd-kind-type-literal">
+												<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>ex<span class="tsd-signature-symbol">: </span><a href="../modules/_ast_node_.html#texpression" class="tsd-signature-type">TExpression</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../modules/_ast_node_.html#texpression" class="tsd-signature-type">TExpression</a></li>
+											</ul>
+											<ul class="tsd-descriptions">
+												<li class="tsd-description">
+													<h4 class="tsd-parameters-title">Parameters</h4>
+													<ul class="tsd-parameters">
+														<li>
+															<h5>ex: <a href="../modules/_ast_node_.html#texpression" class="tsd-signature-type">TExpression</a></h5>
+														</li>
+													</ul>
+													<h4 class="tsd-returns-title">Returns <a href="../modules/_ast_node_.html#texpression" class="tsd-signature-type">TExpression</a></h4>
+												</li>
+											</ul>
+										</li>
+									</ul>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="registerprefix" class="tsd-anchor"></a>
+					<h3>register<wbr>Prefix</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">register<wbr>Prefix<span class="tsd-signature-symbol">(</span>tokenType<span class="tsd-signature-symbol">: </span><a href="../modules/_token_token__.html#tokentype" class="tsd-signature-type">TokenType</a>, fn<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><a href="../interfaces/_ast_node_.expression.html" class="tsd-signature-type">Expression</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/sadnessOjisan/tmonkey/blob/f6ff879/src/parser/parser.ts#L465">parser/parser.ts:465</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>tokenType: <a href="../modules/_token_token__.html#tokentype" class="tsd-signature-type">TokenType</a></h5>
+								</li>
+								<li>
+									<h5>fn: <span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><a href="../interfaces/_ast_node_.expression.html" class="tsd-signature-type">Expression</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span></h5>
+									<ul class="tsd-parameters">
+										<li class="tsd-parameter-signature">
+											<ul class="tsd-signatures tsd-kind-type-literal">
+												<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/_ast_node_.expression.html" class="tsd-signature-type">Expression</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span></li>
+											</ul>
+											<ul class="tsd-descriptions">
+												<li class="tsd-description">
+													<h4 class="tsd-returns-title">Returns <a href="../interfaces/_ast_node_.expression.html" class="tsd-signature-type">Expression</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span></h4>
+												</li>
+											</ul>
+										</li>
+									</ul>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-static">
+					<a name="of" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> of</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-static">
+						<li class="tsd-signature tsd-kind-icon">of<span class="tsd-signature-symbol">(</span>lexer<span class="tsd-signature-symbol">: </span><a href="_lexer_lexer_.lexer.html" class="tsd-signature-type">Lexer</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_parser_parser_.parser.html" class="tsd-signature-type">Parser</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/sadnessOjisan/tmonkey/blob/f6ff879/src/parser/parser.ts#L98">parser/parser.ts:98</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>parser classをinstance化する</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>lexer: <a href="_lexer_lexer_.lexer.html" class="tsd-signature-type">Lexer</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>レキサー</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="_parser_parser_.parser.html" class="tsd-signature-type">Parser</a></h4>
+						</li>
+					</ul>
+				</section>
+			</section>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class="globals  ">
+						<a href="../globals.html"><em>Globals</em></a>
+					</li>
+					<li class="current tsd-kind-module">
+						<a href="../modules/_parser_parser_.html">&quot;parser/parser&quot;</a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+				</ul>
+				<ul class="current">
+					<li class="current tsd-kind-class tsd-parent-kind-module">
+						<a href="_parser_parser_.parser.html" class="tsd-kind-icon">Parser</a>
+						<ul>
+							<li class=" tsd-kind-constructor tsd-parent-kind-class">
+								<a href="_parser_parser_.parser.html#constructor" class="tsd-kind-icon">constructor</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="_parser_parser_.parser.html#_errors" class="tsd-kind-icon">_errors</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="_parser_parser_.parser.html#curtoken" class="tsd-kind-icon">cur<wbr>Token</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="_parser_parser_.parser.html#infixparsefns" class="tsd-kind-icon">infix<wbr>Parse<wbr>Fns</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="_parser_parser_.parser.html#lexer" class="tsd-kind-icon">lexer</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="_parser_parser_.parser.html#peektoken" class="tsd-kind-icon">peek<wbr>Token</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="_parser_parser_.parser.html#prefixparsefns" class="tsd-kind-icon">prefix<wbr>Parse<wbr>Fns</a>
+							</li>
+							<li class=" tsd-kind-accessor tsd-parent-kind-class">
+								<a href="_parser_parser_.parser.html#errors" class="tsd-kind-icon">errors</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_parser_parser_.parser.html#curprecedence" class="tsd-kind-icon">cur<wbr>Precedence</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_parser_parser_.parser.html#curtokenis" class="tsd-kind-icon">cur<wbr>Token<wbr>Is</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_parser_parser_.parser.html#expectpeek" class="tsd-kind-icon">expect<wbr>Peek</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_parser_parser_.parser.html#nexttoken" class="tsd-kind-icon">next<wbr>Token</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_parser_parser_.parser.html#noprefixparsefnerror" class="tsd-kind-icon">no<wbr>Prefix<wbr>Parse<wbr>FnError</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_parser_parser_.parser.html#parseblockstatement" class="tsd-kind-icon">parse<wbr>Block<wbr>Statement</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_parser_parser_.parser.html#parseboolean" class="tsd-kind-icon">parse<wbr>Boolean</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_parser_parser_.parser.html#parseexpression" class="tsd-kind-icon">parse<wbr>Expression</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_parser_parser_.parser.html#parseexpressionstatement" class="tsd-kind-icon">parse<wbr>Expression<wbr>Statement</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_parser_parser_.parser.html#parsefunctionliteral" class="tsd-kind-icon">parse<wbr>Function<wbr>Literal</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_parser_parser_.parser.html#parsefunctionparameters" class="tsd-kind-icon">parse<wbr>Function<wbr>Parameters</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_parser_parser_.parser.html#parsegroupedexpression" class="tsd-kind-icon">parse<wbr>Grouped<wbr>Expression</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_parser_parser_.parser.html#parseidentifier" class="tsd-kind-icon">parse<wbr>Identifier</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_parser_parser_.parser.html#parseifexpression" class="tsd-kind-icon">parse<wbr>IfExpression</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_parser_parser_.parser.html#parseinfixexpression" class="tsd-kind-icon">parse<wbr>Infix<wbr>Expression</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_parser_parser_.parser.html#parseintegerliteral" class="tsd-kind-icon">parse<wbr>Integer<wbr>Literal</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_parser_parser_.parser.html#parseletstatement" class="tsd-kind-icon">parse<wbr>Let<wbr>Statement</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_parser_parser_.parser.html#parseprefixexpression" class="tsd-kind-icon">parse<wbr>Prefix<wbr>Expression</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_parser_parser_.parser.html#parseprogram" class="tsd-kind-icon">parse<wbr>Program</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_parser_parser_.parser.html#parsereturnstatement" class="tsd-kind-icon">parse<wbr>Return<wbr>Statement</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_parser_parser_.parser.html#parsestatement" class="tsd-kind-icon">parse<wbr>Statement</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_parser_parser_.parser.html#peekerror" class="tsd-kind-icon">peek<wbr>Error</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_parser_parser_.parser.html#peekprecedence" class="tsd-kind-icon">peek<wbr>Precedence</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_parser_parser_.parser.html#peektokenis" class="tsd-kind-icon">peek<wbr>Token<wbr>Is</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_parser_parser_.parser.html#registerinfix" class="tsd-kind-icon">register<wbr>Infix</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_parser_parser_.parser.html#registerprefix" class="tsd-kind-icon">register<wbr>Prefix</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-static">
+								<a href="_parser_parser_.parser.html#of" class="tsd-kind-icon">of</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+				<ul class="after-current">
+					<li class=" tsd-kind-type-alias tsd-parent-kind-module tsd-is-not-exported">
+						<a href="../modules/_parser_parser_.html#infixparsefnstype" class="tsd-kind-icon">Infix<wbr>Parse<wbr>Fns<wbr>Type</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-parent-kind-module tsd-is-not-exported">
+						<a href="../modules/_parser_parser_.html#prefixparsefnstype" class="tsd-kind-icon">Prefix<wbr>Parse<wbr>Fns<wbr>Type</a>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-object-literal"><span class="tsd-kind-icon">Object literal</span></li>
+				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
+				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
+				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+				<li class="tsd-kind-type-alias tsd-has-type-parameter"><span class="tsd-kind-icon">Type alias with type parameter</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class"><span class="tsd-kind-icon">Accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private property</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static method</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="../assets/js/main.js"></script>
+<script>if (location.protocol == 'file:') document.write('<script src="../assets/js/search.js"><' + '/script>');</script>
+</body>
+</html>
