@@ -73,6 +73,7 @@
 						<section class="tsd-index-section tsd-is-not-exported">
 							<h3>Variables</h3>
 							<ul class="tsd-index-list">
+								<li class="tsd-kind-variable tsd-parent-kind-module tsd-is-not-exported"><a href="_main_.html#evaluated" class="tsd-kind-icon">evaluated</a></li>
 								<li class="tsd-kind-variable tsd-parent-kind-module tsd-is-not-exported"><a href="_main_.html#lexer" class="tsd-kind-icon">lexer</a></li>
 								<li class="tsd-kind-variable tsd-parent-kind-module tsd-is-not-exported"><a href="_main_.html#line" class="tsd-kind-icon">line</a></li>
 								<li class="tsd-kind-variable tsd-parent-kind-module tsd-is-not-exported"><a href="_main_.html#perser" class="tsd-kind-icon">perser</a></li>
@@ -85,22 +86,32 @@
 			<section class="tsd-panel-group tsd-member-group tsd-is-not-exported">
 				<h2>Variables</h2>
 				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module tsd-is-not-exported">
+					<a name="evaluated" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> evaluated</h3>
+					<div class="tsd-signature tsd-kind-icon">evaluated<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol"> = evaluate(program, Environment.of({}))</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/sadnessOjisan/tmonkey/blob/020d50d/src/main.ts#L25">main.ts:25</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module tsd-is-not-exported">
 					<a name="lexer" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagConst">Const</span> lexer</h3>
 					<div class="tsd-signature tsd-kind-icon">lexer<span class="tsd-signature-symbol">:</span> <a href="../classes/_lexer_lexer_.lexer.html" class="tsd-signature-type">Lexer</a><span class="tsd-signature-symbol"> = Lexer.of(line)</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/sadnessOjisan/tmonkey/blob/c613d35/src/main.ts#L13">main.ts:13</a></li>
+							<li>Defined in <a href="https://github.com/sadnessOjisan/tmonkey/blob/020d50d/src/main.ts#L21">main.ts:21</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module tsd-is-not-exported">
 					<a name="line" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagConst">Const</span> line</h3>
-					<div class="tsd-signature tsd-kind-icon">line<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"let five &#x3D; 5;let ten &#x3D; 10;let add &#x3D; fn(x, y) {x + y;};add(3, 4);"</span><span class="tsd-signature-symbol"> = &#x60;let five &#x3D; 5;let ten &#x3D; 10;let add &#x3D; fn(x, y) {x + y;};add(3, 4);&#x60;</span></div>
+					<div class="tsd-signature tsd-kind-icon">line<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"let five &#x3D; 5;let ten &#x3D; 10;let add &#x3D; fn(x, y) {x + y;};let result &#x3D; add(five, ten);if (5 &lt; add(1,2)) {return true;} else {return false;};"</span><span class="tsd-signature-symbol"> = &#x60;let five &#x3D; 5;let ten &#x3D; 10;let add &#x3D; fn(x, y) {x + y;};let result &#x3D; add(five, ten);if (5 &lt; add(1,2)) {return true;} else {return false;};&#x60;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/sadnessOjisan/tmonkey/blob/c613d35/src/main.ts#L4">main.ts:4</a></li>
+							<li>Defined in <a href="https://github.com/sadnessOjisan/tmonkey/blob/020d50d/src/main.ts#L6">main.ts:6</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -110,7 +121,7 @@
 					<div class="tsd-signature tsd-kind-icon">perser<span class="tsd-signature-symbol">:</span> <a href="../classes/_parser_parser_.parser.html" class="tsd-signature-type">Parser</a><span class="tsd-signature-symbol"> = Parser.of(lexer)</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/sadnessOjisan/tmonkey/blob/c613d35/src/main.ts#L14">main.ts:14</a></li>
+							<li>Defined in <a href="https://github.com/sadnessOjisan/tmonkey/blob/020d50d/src/main.ts#L22">main.ts:22</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -120,7 +131,7 @@
 					<div class="tsd-signature tsd-kind-icon">program<span class="tsd-signature-symbol">:</span> <a href="../classes/_ast_program_.program.html" class="tsd-signature-type">Program</a><span class="tsd-signature-symbol"> = perser.parseProgram()</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/sadnessOjisan/tmonkey/blob/c613d35/src/main.ts#L16">main.ts:16</a></li>
+							<li>Defined in <a href="https://github.com/sadnessOjisan/tmonkey/blob/020d50d/src/main.ts#L24">main.ts:24</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -139,6 +150,9 @@
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
+					<li class=" tsd-kind-variable tsd-parent-kind-module tsd-is-not-exported">
+						<a href="_main_.html#evaluated" class="tsd-kind-icon">evaluated</a>
+					</li>
 					<li class=" tsd-kind-variable tsd-parent-kind-module tsd-is-not-exported">
 						<a href="_main_.html#lexer" class="tsd-kind-icon">lexer</a>
 					</li>
